@@ -1,0 +1,36 @@
+# OpenROAD generated files
+**/results/
+**/logs/
+**/objects/
+**/reports/
+**/orfs_results/
+**/orfs_logs/
+**/orfs_objects/
+
+# Simulation outputs
+**/*.vcd
+**/*.fst
+**/*.wlf
+**/sim/*
+!**/sim/.gitkeep
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+
+# OpenROAD temporary databases
+*.odb.tmp
+*.def.tmp
+
+# Old standalone OpenROAD output
+OpenROAD_Output/
+
+# Local/unrelated files
+vaultlink.js
+**/*.bak
+
+# Generated Yosys schematic DOT files
+**/yosys/schematics/*.dot

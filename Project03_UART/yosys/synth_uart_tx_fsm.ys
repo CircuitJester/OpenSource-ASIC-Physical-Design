@@ -1,0 +1,13 @@
+read_verilog rtl/uart_tx_fsm.v
+
+hierarchy -top uart_tx_fsm
+
+proc
+opt
+
+stat
+
+select -module uart_tx_fsm
+show -format svg -prefix yosys/schematics/uart_tx_fsm
+
+write_verilog -noattr yosys/netlists/uart_tx_fsm_netlist.v
