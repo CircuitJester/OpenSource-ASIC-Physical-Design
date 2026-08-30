@@ -1,0 +1,15 @@
+read_verilog rtl/fifo.v
+hierarchy -top fifo
+proc
+memory
+opt
+fsm
+opt
+techmap
+opt
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+clean
+write_verilog yosys/netlists/fifo_netlist.v
+select -module fifo
+show -format svg -prefix yosys/schematics/fifo

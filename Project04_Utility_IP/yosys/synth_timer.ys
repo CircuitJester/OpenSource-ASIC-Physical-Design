@@ -1,0 +1,14 @@
+read_verilog rtl/timer.v
+hierarchy -top timer
+proc
+opt
+fsm
+opt
+techmap
+opt
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+clean
+write_verilog yosys/netlists/timer_netlist.v
+select -module timer
+show -format svg -prefix yosys/schematics/timer

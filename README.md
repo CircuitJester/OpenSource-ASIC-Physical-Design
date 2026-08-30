@@ -30,7 +30,7 @@ The RTL and synthesis work is maintained separately in the Verilog RTL portfolio
 |---|---|---|
 | Project 01 | 4-bit ALU | Combinational ASIC physical implementation |
 | Project 02 | 4-bit Binary Counter | Sequential ASIC physical implementation |
-| Project 03 | UART TX/RX FSM | Communication-oriented RTL and ASIC physical design setup |
+| Project 03 | UART TX/RX FSM | Communication-oriented RTL and complete ASIC physical implementation |
 
 ## Project 01 — 4-bit ALU
 
@@ -90,17 +90,52 @@ A UART transmitter and receiver implemented using finite-state machines.
 
 The project expands the portfolio from basic arithmetic and sequential logic into a communication-oriented digital subsystem.
 
-The RTL contains separate transmitter and receiver FSMs with dedicated timing constraints and OpenROAD configuration.
+The RTL contains separate transmitter and receiver FSMs with dedicated timing constraints and independent OpenROAD physical-design configurations.
 
-### Current Focus
+Both UART TX and UART RX were taken through the ASIC physical implementation flow and successfully generated final physical-design artifacts.
+
+### UART Transmitter
+
+The UART transmitter implements a finite-state machine consisting of:
+
+IDLE
+→ START
+→ DATA
+→ STOP
+→ IDLE
+
+The transmitter accepts an 8-bit parallel input and serializes the data onto the UART TX output.
+
+### UART Receiver
+
+The UART receiver implements a finite-state machine consisting of:
+
+IDLE
+→ START
+→ DATA
+→ STOP
+→ DONE
+→ IDLE
+
+The receiver samples the serial RX input and reconstructs the received 8-bit data word.
+
+### Physical Design Focus
 
 - UART transmitter FSM
 - UART receiver FSM
-- RTL timing constraints
+- Timing constraints
 - OpenROAD configuration
 - Power-grid configuration
-- Physical-design flow investigation
-- Nangate45 implementation environment
+- Floorplanning
+- Standard-cell placement
+- Clock Tree Synthesis
+- Global routing
+- Detailed routing
+- Routing DRC analysis
+- Parasitic extraction
+- IR-drop analysis
+- Final physical database generation
+- GDSII generation
 
 ### Main Files
 
@@ -110,8 +145,127 @@ The RTL contains separate transmitter and receiver FSMs with dedicated timing co
 - constraints/uart_rx_fsm.sdc
 - openroad/uart_tx/config.mk
 - openroad/uart_tx/pdn.tcl
+- openroad/uart_rx/config.mk
+- openroad/uart_rx/pdn.tcl
 - yosys/synth_uart_tx_fsm.ys
 - yosys/synth_uart_rx_fsm.ys
+
+### UART TX Physical Implementation
+
+The UART transmitter successfully completed the OpenROAD physical-design flow and generated final physical-design artifacts.
+
+Final artifacts include:
+
+- 6_final.def
+- 6_final.gds
+- 6_final.odb
+- 6_final.spef
+- 6_final.v
+
+These artifacts represent the final routed and extracted implementation.
+
+### UART RX Physical Implementation
+
+The UART receiver successfully completed the OpenROAD physical-design flow through final GDSII generation.
+
+The flow successfully completed:
+
+- Logic synthesis
+- Floorplanning
+- Tapcell insertion
+- Power distribution network generation
+- Global placement
+- Detailed placement
+- Clock Tree Synthesis
+- Global routing
+- Detailed routing
+- Filler insertion
+- RC extraction
+- IR analysis
+- Final physical database generation
+- GDSII generation
+
+### UART RX CTS Runtime Workaround
+
+During the UART RX implementation, OpenROAD encountered an `illegal instruction` during the post-CTS timing-repair operation.
+
+The failure occurred after Clock Tree Synthesis had completed successfully and after setup and hold analysis reported no violations.
+
+The RX OpenROAD configuration therefore uses:
+
+export SKIP_CTS_REPAIR_TIMING = 1
+
+This bypasses the problematic post-CTS timing-repair step while allowing the remaining physical-design flow to continue.
+
+The RX implementation subsequently completed successfully through routing, filler insertion, RC extraction, IR analysis, and final GDSII generation.
+
+The workaround is intentionally documented so that the implementation flow remains transparent and reproducible.
+
+### UART RX Routing Results
+
+During detailed routing, the router initially reported routing violations.
+
+The routing optimization process resolved the reported violations.
+
+Final routing result:
+
+Number of violations = 0
+
+Additional routing statistics included:
+
+Total wire length = 811 um
+Total number of vias = 641
+
+### UART RX Physical Metrics
+
+The final physical implementation reported approximately:
+
+Design area = 238 um²
+Utilization = 21%
+
+The final implementation included sequential cells, combinational cells, clock buffers, filler cells, tap cells, and timing-repair cells.
+
+### UART RX RC Extraction
+
+The final routed design was processed through RC extraction.
+
+The extraction completed successfully and generated:
+
+6_final.spef
+
+The extracted parasitic data includes resistance, capacitance, and coupling-capacitance information for the routed interconnect.
+
+### UART RX Power Integrity
+
+The final implementation also included power-grid analysis for the VDD and VSS networks.
+
+The reported worst-case IR-drop values were approximately:
+
+VDD worst-case IR drop = 0.000146 V
+VSS worst-case IR drop = 0.000162 V
+
+The reported percentage drop was approximately:
+
+0.01%
+
+The final analysis also confirmed connectivity of the VDD and VSS power networks.
+
+### UART RX Final GDSII
+
+The physical implementation generated the final GDSII layout:
+
+6_final.gds
+
+The final physical-design artifacts include:
+
+- 6_final.gds
+- 6_final.odb
+- 6_final.def
+- 6_final.spef
+- 6_final.v
+- 6_final.sdc
+
+The GDS merge stage completed successfully with the required standard-cell layout data.
 
 ## ASIC Physical Design Flow
 
@@ -184,7 +338,7 @@ The implemented design is analyzed for physical characteristics such as:
 
 ### 11. GDSII
 
-The final physical database can be converted into GDSII layout data representing the manufactured chip geometry.
+The final physical database can be converted into GDSII layout data representing the chip geometry.
 
 ## Technology
 
@@ -241,7 +395,10 @@ The OpenROAD environment is executed through Docker to provide a reproducible Li
     │
     ├── Project03_UART/
     │   ├── constraints/
+    │   ├── layout/
     │   ├── openroad/
+    │   │   ├── uart_tx/
+    │   │   └── uart_rx/
     │   ├── rtl/
     │   └── yosys/
     │
@@ -259,14 +416,18 @@ Each project is used to understand what happens at every stage of physical imple
 The workflow therefore emphasizes:
 
 - Understanding tool commands
+- Understanding why each command is used
 - Reading generated reports
 - Inspecting physical databases
 - Understanding timing constraints
 - Understanding placement and routing
 - Studying power distribution
 - Investigating physical-design errors
+- Debugging EDA tool issues
 - Comparing implementation results
 - Building reproducible project configurations
+
+The learning process focuses on gradually developing practical knowledge of the complete ASIC implementation flow rather than memorizing commands without understanding their purpose.
 
 ## Learning Progression
 
@@ -274,11 +435,11 @@ The projects progressively increase in complexity.
 
 Project 01 establishes the basic ASIC physical implementation workflow using combinational logic.
 
-Project 02 introduces sequential logic and clock-tree considerations.
+Project 02 introduces sequential logic, clocked cells, clock-tree considerations, parasitic extraction, and power-related analysis.
 
-Project 03 expands the design scope toward communication-oriented RTL and prepares the flow for more complex physical implementation challenges.
+Project 03 expands the design scope toward communication-oriented RTL and demonstrates the complete physical implementation of both UART transmitter and receiver blocks.
 
-Future projects will progressively move toward larger RTL blocks, reusable IP, more complex timing behavior, advanced physical constraints, and eventually processor-oriented and SoC-level physical design concepts.
+Future projects will progressively move toward larger RTL blocks, reusable IP, more complex timing behavior, advanced physical constraints, larger communication systems, processor-oriented designs, and eventually SoC-level physical design concepts.
 
 ## Current Status
 
@@ -286,7 +447,7 @@ Future projects will progressively move toward larger RTL blocks, reusable IP, m
 |---|---|---|---|---|
 | Project 01 | Complete | Complete | Complete | Complete |
 | Project 02 | Complete | Complete | Complete | Complete |
-| Project 03 | Complete | Complete | In Progress | In Progress |
+| Project 03 | Complete | Complete | Complete | Complete |
 
 ## Portfolio Objective
 
@@ -307,6 +468,6 @@ The long-term objective is to progress from RTL-level digital design toward comp
 
 ## Author
 
-CircuitJester
+Omm Prakash Sahoo
 
 Built as a hands-on engineering portfolio for learning and demonstrating open-source ASIC physical design.

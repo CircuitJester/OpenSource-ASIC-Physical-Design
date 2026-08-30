@@ -1,0 +1,14 @@
+read_verilog rtl/pwm_generator.v
+hierarchy -top pwm_generator
+proc
+opt
+fsm
+opt
+techmap
+opt
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+clean
+write_verilog yosys/netlists/pwm_generator_netlist.v
+select -module pwm_generator
+show -format svg -prefix yosys/schematics/pwm_generator
