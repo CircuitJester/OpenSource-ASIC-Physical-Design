@@ -1,0 +1,26 @@
+read_verilog \
+    rtl/spi_master.v \
+    rtl/spi_clock_generator.v \
+    rtl/spi_shift_register.v \
+    rtl/spi_bit_counter.v \
+    rtl/spi_master_fsm.v
+
+hierarchy -top spi_master
+
+proc
+opt
+fsm
+opt
+memory
+opt
+techmap
+opt
+
+abc -g simple
+
+clean
+
+select -module spi_master
+show -format svg -prefix yosys/schematics/spi_master
+
+write_verilog -noattr yosys/netlists/spi_master_netlist.v
