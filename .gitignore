@@ -34,3 +34,12 @@ vaultlink.js
 
 # Generated Yosys schematic DOT files
 **/yosys/schematics/*.dot
+
+# ASIC physical-design generated outputs
+**/layout/
+*.odb
+*.def
+*.gds
+*.lyrdb
+*.rpt
+*.cdl
