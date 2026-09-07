@@ -1,0 +1,31 @@
+read_verilog /project/rtl/axi_master_fsm.v
+read_verilog /project/rtl/axi_read_address.v
+read_verilog /project/rtl/axi_read_data.v
+read_verilog /project/rtl/axi_write_address.v
+read_verilog /project/rtl/axi_write_data.v
+read_verilog /project/rtl/axi_write_response.v
+read_verilog /project/rtl/axi_master_top.v
+
+hierarchy -check -top axi_master_top
+
+proc
+opt
+flatten
+opt_clean
+opt
+memory_map
+opt
+techmap
+opt
+
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+opt_clean -purge
+rename -hide
+
+clean
+stat
+
+write_verilog -noattr -simple-lhs /project/yosys/asic/axi_master_mapped.v
