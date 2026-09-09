@@ -1,0 +1,30 @@
+read_verilog /project/rtl/spi_chip_select.v
+read_verilog /project/rtl/spi_clock_generator.v
+read_verilog /project/rtl/spi_master_fsm.v
+read_verilog /project/rtl/spi_master_top.v
+read_verilog /project/rtl/spi_shift_register.v
+
+hierarchy -check -top spi_master_top
+
+proc
+opt
+flatten
+opt_clean
+opt
+memory_map
+opt
+techmap
+opt
+
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+hilomap -hicell LOGIC1_X1 Z -locell LOGIC0_X1 Z
+opt_clean -purge
+rename -hide
+
+clean
+stat
+
+write_verilog -noattr -simple-lhs /project/yosys/asic/spi_master_mapped.v
