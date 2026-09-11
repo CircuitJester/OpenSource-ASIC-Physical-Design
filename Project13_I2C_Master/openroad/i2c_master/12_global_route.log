@@ -1,0 +1,66 @@
+OpenROAD 26Q3-1080-gab6fd26351 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+Design area 515 um^2 33% utilization.
+Startpoint: rst (input port clocked by clk)
+Endpoint: _474_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+     Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------
+                     0.000    0.000   clock clk (rise edge)
+                     0.000    0.000   clock network delay (propagated)
+                     2.000    2.000 v input external delay
+ 106.201    0.000    0.000    2.000 v rst (in)
+            0.009    0.007    2.007 v _441_/A (INV_X1)
+   1.766    0.007    0.013    2.020 ^ _441_/ZN (INV_X1)
+            0.007    0.000    2.020 ^ _474_/SN (DFFS_X1)
+                              2.020   data arrival time
+
+                    10.000   10.000   clock clk (rise edge)
+                     0.060   10.060   clock network delay (propagated)
+                    -0.200    9.860   clock uncertainty
+                     0.000    9.860   clock reconvergence pessimism
+                              9.860 ^ _474_/CK (DFFS_X1)
+                     0.045    9.905   library recovery time
+                              9.905   data required time
+---------------------------------------------------------------------------
+                              9.905   data required time
+                             -2.020   data arrival time
+---------------------------------------------------------------------------
+                              7.885   slack (MET)
+
+
+Startpoint: _501_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: sda_out (output port clocked by clk)
+Path Group: clk
+Path Type: max
+
+     Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------
+                     0.000    0.000   clock clk (rise edge)
+                     0.060    0.060   clock network delay (propagated)
+            0.009    0.000    0.060 ^ _501_/CK (DFFR_X1)
+   3.342    0.008    0.091    0.151 v _501_/Q (DFFR_X1)
+            0.008    0.000    0.151 v _386_/A2 (NOR2_X1)
+   2.295    0.018    0.031    0.182 ^ _386_/ZN (NOR2_X1)
+            0.018    0.000    0.182 ^ _387_/S (MUX2_X1)
+   0.130    0.008    0.055    0.238 v _387_/Z (MUX2_X1)
+            0.008    0.000    0.238 v sda_out (out)
+                              0.238   data arrival time
+
+                    10.000   10.000   clock clk (rise edge)
+                     0.000   10.000   clock network delay (propagated)
+                    -0.200    9.800   clock uncertainty
+                     0.000    9.800   clock reconvergence pessimism
+                    -2.000    7.800   output external delay
+                              7.800   data required time
+---------------------------------------------------------------------------
+                              7.800   data required time
+                             -0.238   data arrival time
+---------------------------------------------------------------------------
+                              7.562   slack (MET)
+
+

@@ -1,0 +1,23 @@
+OpenROAD 26Q3-1080-gab6fd26351 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO IFP-0107] Defining die area using utilization: 30.00% and aspect ratio: 1.
+[WARNING IFP-0028] Core area lower left (2.000, 2.000) snapped to (2.090, 2.800).
+[INFO IFP-0001] Added 28 rows of 212 site FreePDK45_38x28_10R_NP_162NW_34O.
+[INFO IFP-0100] Die BBox:  (  0.000  0.000 ) ( 44.500 44.500 ) um
+[INFO IFP-0101] Core BBox: (  2.090  2.800 ) ( 42.370 42.000 ) um
+[INFO IFP-0102] Core area:                         1578.976 um^2
+[INFO IFP-0103] Total instances area:               492.100 um^2
+[INFO IFP-0104] Effective utilization:                0.312
+[INFO IFP-0105] Number of instances:                    246
+Found 0 macro blocks.
+Using 2 tracks default min distance between IO pins.
+[INFO PPL-0001] Number of available slots 304
+[INFO PPL-0002] Number of I/O             25
+[INFO PPL-0003] Number of I/O w/sink      25
+[INFO PPL-0004] Number of I/O w/o sink    0
+[INFO PPL-0005] Slots per section         200
+[INFO PPL-0008] Successfully assigned pins to sections.
+[INFO PPL-0012] I/O nets HPWL: 643.83 um.
+Design area 492 um^2 31% utilization.

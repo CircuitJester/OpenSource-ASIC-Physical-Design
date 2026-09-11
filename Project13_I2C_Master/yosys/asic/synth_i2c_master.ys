@@ -1,0 +1,29 @@
+read_verilog /project/rtl/i2c_ack_detector.v
+read_verilog /project/rtl/i2c_clock_generator.v
+read_verilog /project/rtl/i2c_master_fsm.v
+read_verilog /project/rtl/i2c_master_top.v
+read_verilog /project/rtl/i2c_shift_register.v
+read_verilog /project/rtl/i2c_start_stop.v
+
+hierarchy -check -top i2c_master_top
+
+proc
+opt
+flatten
+opt_clean
+opt
+memory_map
+opt
+techmap
+opt
+
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+opt_clean -purge
+rename -hide
+clean
+
+stat
+
+write_verilog -noattr -simple-lhs /project/yosys/asic/i2c_master_mapped.v

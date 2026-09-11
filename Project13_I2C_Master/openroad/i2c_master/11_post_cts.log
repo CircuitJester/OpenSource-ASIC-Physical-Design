@@ -1,0 +1,100 @@
+OpenROAD 26Q3-1080-gab6fd26351 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[WARNING EST-0027] no estimated parasitics. Using wire load models.
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |       332
+    final |     +0.0% |       0 |       0 |             0 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0504] Runtime: 0.05s
+[INFO DPL-0006] Core area: 1578.98 um^2
+[INFO DPL-0007] Movable instances area: 515.24 um^2
+[INFO DPL-0008] Fixed instances area within core: 0.00 um^2
+[INFO DPL-0009] Utilization: 32.6%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 262 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 0.
+[INFO DPL-0500] Runtime: 0.00s
+Placement Analysis
+---------------------------------
+total displacement         26.2 u
+average displacement        0.1 u
+max displacement            2.8 u
+original HPWL            2288.9 u
+legalized HPWL           2303.9 u
+delta HPWL                    1 %
+
+Design area 515 um^2 33% utilization.
+Startpoint: rst (input port clocked by clk)
+Endpoint: _474_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+     Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------
+                     0.000    0.000   clock clk (rise edge)
+                     0.000    0.000   clock network delay (propagated)
+                     2.000    2.000 v input external delay
+  89.863    0.000    0.000    2.000 v rst (in)
+            0.000    0.000    2.000 v _441_/A (INV_X1)
+   1.356    0.006    0.008    2.008 ^ _441_/ZN (INV_X1)
+            0.006    0.000    2.008 ^ _474_/SN (DFFS_X1)
+                              2.008   data arrival time
+
+                    10.000   10.000   clock clk (rise edge)
+                     0.055   10.055   clock network delay (propagated)
+                    -0.200    9.855   clock uncertainty
+                     0.000    9.855   clock reconvergence pessimism
+                              9.855 ^ _474_/CK (DFFS_X1)
+                     0.045    9.900   library recovery time
+                              9.900   data required time
+---------------------------------------------------------------------------
+                              9.900   data required time
+                             -2.008   data arrival time
+---------------------------------------------------------------------------
+                              7.892   slack (MET)
+
+
+Startpoint: _501_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: sda_out (output port clocked by clk)
+Path Group: clk
+Path Type: max
+
+     Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------
+                     0.000    0.000   clock clk (rise edge)
+                     0.055    0.055   clock network delay (propagated)
+            0.008    0.000    0.055 ^ _501_/CK (DFFR_X1)
+   3.011    0.008    0.090    0.146 v _501_/Q (DFFR_X1)
+            0.008    0.000    0.146 v _386_/A2 (NOR2_X1)
+   1.920    0.017    0.029    0.174 ^ _386_/ZN (NOR2_X1)
+            0.017    0.000    0.174 ^ _387_/S (MUX2_X1)
+   0.000    0.008    0.055    0.229 v _387_/Z (MUX2_X1)
+            0.008    0.000    0.229 v sda_out (out)
+                              0.229   data arrival time
+
+                    10.000   10.000   clock clk (rise edge)
+                     0.000   10.000   clock network delay (propagated)
+                    -0.200    9.800   clock uncertainty
+                     0.000    9.800   clock reconvergence pessimism
+                    -2.000    7.800   output external delay
+                              7.800   data required time
+---------------------------------------------------------------------------
+                              7.800   data required time
+                             -0.229   data arrival time
+---------------------------------------------------------------------------
+                              7.571   slack (MET)
+
+

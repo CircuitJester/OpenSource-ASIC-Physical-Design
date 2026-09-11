@@ -1,0 +1,125 @@
+OpenROAD 26Q3-1080-gab6fd26351 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO CTS-0050] Root buffer is BUF_X4.
+[INFO CTS-0051] Sink buffer is BUF_X4.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    BUF_X1
+                    BUF_X2
+                    BUF_X4
+                    BUF_X8
+                    BUF_X16
+[INFO CTS-0049] Characterization buffer is BUF_X16.
+[INFO CTS-0007] Net "clk" found for clock "clk".
+[INFO CTS-0010]  Clock net "clk" has 58 sinks.
+[INFO CTS-0008] TritonCTS found 1 clock nets.
+[INFO CTS-0097] Characterization used 5 buffer(s) types.
+[INFO CTS-0201] 0 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net clk.
+[INFO CTS-0028]  Total number of sinks: 58.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 14000  dbu (7 um).
+[INFO CTS-0023]  Original sink region: [(8095, 6580), (74215, 83020)].
+[INFO CTS-0024]  Normalized sink region: [(0.578214, 0.47), (5.30107, 5.93)].
+[INFO CTS-0025]     Width:  4.7229.
+[INFO CTS-0026]     Height: 5.4600.
+ Level 1
+    Direction: Vertical
+    Sinks per sub-region: 29
+    Sub-region size: 4.7229 X 2.7300
+[INFO CTS-0034]     Segment length (rounded): 1.
+ Level 2
+    Direction: Horizontal
+    Sinks per sub-region: 15
+    Sub-region size: 2.3614 X 2.7300
+[INFO CTS-0034]     Segment length (rounded): 1.
+ Level 3
+    Direction: Vertical
+    Sinks per sub-region: 8
+    Sub-region size: 2.3614 X 1.3650
+[INFO CTS-0034]     Segment length (rounded): 1.
+[INFO CTS-0038]  Stop criterion found. Sink region hpwl is smaller than max wirelength (832.619 um) and max number of sinks is 15.
+[INFO CTS-0035]  Number of sinks covered: 58.
+[INFO CTS-0018]     Created 9 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 2.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 2.
+[INFO CTS-0015]     Created 9 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 6:2, 7:3, 8:2, 9:1..
+[INFO CTS-0017]     Max level of the clock tree: 3.
+[INFO CTS-0098] Clock net "clk"
+[INFO CTS-0099]  Sinks 65
+[INFO CTS-0100]  Leaf buffers 0
+[INFO CTS-0101]  Average sink wire length 50.88 um
+[INFO CTS-0102]  Path depth 2 - 2
+[INFO CTS-0207]  Dummy loads inserted 7
+[INFO CTS-0500] Runtime: 0.67s
+Clock clk
+   0.06 source latency _455_/CK ^
+  -0.06 target latency _466_/CK ^
+   0.20 clock uncertainty
+   0.00 CRPR
+--------------
+   0.20 setup skew
+
+Startpoint: rst (input port clocked by clk)
+Endpoint: _475_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+     Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------
+                     0.000    0.000   clock clk (rise edge)
+                     0.000    0.000   clock network delay (propagated)
+                     2.000    2.000 v input external delay
+ 101.210    0.000    0.000    2.000 v rst (in)
+            0.005    0.004    2.004 v _442_/A (INV_X1)
+   1.433    0.006    0.010    2.015 ^ _442_/ZN (INV_X1)
+            0.006    0.000    2.015 ^ _475_/SN (DFFS_X1)
+                              2.015   data arrival time
+
+                    10.000   10.000   clock clk (rise edge)
+                     0.060   10.060   clock network delay (propagated)
+                    -0.200    9.860   clock uncertainty
+                     0.000    9.860   clock reconvergence pessimism
+                              9.860 ^ _475_/CK (DFFS_X1)
+                     0.045    9.905   library recovery time
+                              9.905   data required time
+---------------------------------------------------------------------------
+                              9.905   data required time
+                             -2.015   data arrival time
+---------------------------------------------------------------------------
+                              7.890   slack (MET)
+
+
+Startpoint: _501_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: sda_out (output port clocked by clk)
+Path Group: clk
+Path Type: max
+
+     Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------
+                     0.000    0.000   clock clk (rise edge)
+                     0.060    0.060   clock network delay (propagated)
+            0.009    0.000    0.060 ^ _501_/CK (DFFR_X1)
+   3.219    0.008    0.091    0.151 v _501_/Q (DFFR_X1)
+            0.008    0.000    0.151 v _386_/A2 (NOR2_X1)
+   2.138    0.017    0.030    0.181 ^ _386_/ZN (NOR2_X1)
+            0.017    0.000    0.181 ^ _387_/S (MUX2_X1)
+   0.385    0.009    0.056    0.237 v _387_/Z (MUX2_X1)
+            0.009    0.000    0.237 v sda_out (out)
+                              0.237   data arrival time
+
+                    10.000   10.000   clock clk (rise edge)
+                     0.000   10.000   clock network delay (propagated)
+                    -0.200    9.800   clock uncertainty
+                     0.000    9.800   clock reconvergence pessimism
+                    -2.000    7.800   output external delay
+                              7.800   data required time
+---------------------------------------------------------------------------
+                              7.800   data required time
+                             -0.237   data arrival time
+---------------------------------------------------------------------------
+                              7.563   slack (MET)
+
+
