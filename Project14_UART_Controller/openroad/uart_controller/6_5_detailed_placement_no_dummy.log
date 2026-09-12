@@ -1,0 +1,99 @@
+OpenROAD 26Q3-1080-gab6fd26351 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO DPL-0006] Core area: 2059.90 um^2
+[INFO DPL-0007] Movable instances area: 650.37 um^2
+[INFO DPL-0008] Fixed instances area within core: 0.00 um^2
+[INFO DPL-0009] Utilization: 31.6%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 344 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 0.
+[INFO DPL-0500] Runtime: 0.01s
+Placement Analysis
+---------------------------------
+total displacement          7.6 u
+average displacement        0.0 u
+max displacement            1.9 u
+original HPWL            2665.8 u
+legalized HPWL           2666.8 u
+delta HPWL                    0 %
+
+Design area 650 um^2 32% utilization.
+Startpoint: rst (input port clocked by clk)
+Endpoint: _606_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+     Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------
+            0.000    0.000    0.000   clock clk (rise edge)
+                     0.000    0.000   clock network delay (ideal)
+                     2.000    2.000 v input external delay
+ 108.455    0.000    0.000    2.000 v rst (in)
+            0.000    0.000    2.000 v _598_/A (INV_X1)
+   1.356    0.006    0.008    2.008 ^ _598_/ZN (INV_X1)
+            0.006    0.000    2.008 ^ _606_/SN (DFFS_X1)
+                              2.008   data arrival time
+
+            0.000   10.000   10.000   clock clk (rise edge)
+                     0.000   10.000   clock network delay (ideal)
+                    -0.200    9.800   clock uncertainty
+                     0.000    9.800   clock reconvergence pessimism
+                              9.800 ^ _606_/CK (DFFS_X1)
+                     0.042    9.842   library recovery time
+                              9.842   data required time
+---------------------------------------------------------------------------
+                              9.842   data required time
+                             -2.008   data arrival time
+---------------------------------------------------------------------------
+                              7.834   slack (MET)
+
+
+Startpoint: tx_start (input port clocked by clk)
+Endpoint: _619_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+     Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------
+            0.000    0.000    0.000   clock clk (rise edge)
+                     0.000    0.000   clock network delay (ideal)
+                     2.000    2.000 ^ input external delay
+   2.517    0.000    0.000    2.000 ^ tx_start (in)
+            0.000    0.000    2.000 ^ _359_/A1 (AND2_X1)
+  14.620    0.037    0.060    2.060 ^ _359_/ZN (AND2_X1)
+            0.037    0.000    2.060 ^ _382_/A1 (NOR2_X1)
+  15.026    0.022    0.037    2.096 v _382_/ZN (NOR2_X1)
+            0.022    0.000    2.096 v _461_/C2 (AOI222_X1)
+   1.700    0.047    0.097    2.193 ^ _461_/ZN (AOI222_X1)
+            0.047    0.000    2.193 ^ _462_/A (INV_X1)
+   1.053    0.010    0.007    2.201 v _462_/ZN (INV_X1)
+            0.010    0.000    2.201 v _619_/D (DFFR_X1)
+                              2.201   data arrival time
+
+            0.000   10.000   10.000   clock clk (rise edge)
+                     0.000   10.000   clock network delay (ideal)
+                    -0.200    9.800   clock uncertainty
+                     0.000    9.800   clock reconvergence pessimism
+                              9.800 ^ _619_/CK (DFFR_X1)
+                    -0.041    9.759   library setup time
+                              9.759   data required time
+---------------------------------------------------------------------------
+                              9.759   data required time
+                             -2.201   data arrival time
+---------------------------------------------------------------------------
+                              7.558   slack (MET)
+
+
+

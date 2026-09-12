@@ -1,0 +1,925 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.67 (git sha1 2d1509d1b, Release, GNU /usr/local/bin/wrapped-cc/g++ 11.4.0)
+
+-- Executing script file `/project/yosys/asic/synth_uart_controller.ys' --
+
+1. Executing Verilog-2005 frontend: /project/rtl/uart_baud_generator.v
+Parsing Verilog input from `/project/rtl/uart_baud_generator.v' to AST representation.
+Generating RTLIL representation for module `\uart_baud_generator'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: /project/rtl/uart_receiver.v
+Parsing Verilog input from `/project/rtl/uart_receiver.v' to AST representation.
+Generating RTLIL representation for module `\uart_receiver'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: /project/rtl/uart_rx_fsm.v
+Parsing Verilog input from `/project/rtl/uart_rx_fsm.v' to AST representation.
+Generating RTLIL representation for module `\uart_rx_fsm'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: /project/rtl/uart_top.v
+Parsing Verilog input from `/project/rtl/uart_top.v' to AST representation.
+Generating RTLIL representation for module `\uart_top'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: /project/rtl/uart_transmitter.v
+Parsing Verilog input from `/project/rtl/uart_transmitter.v' to AST representation.
+Generating RTLIL representation for module `\uart_transmitter'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: /project/rtl/uart_tx_fsm.v
+Parsing Verilog input from `/project/rtl/uart_tx_fsm.v' to AST representation.
+Generating RTLIL representation for module `\uart_tx_fsm'.
+Successfully finished Verilog frontend.
+
+7. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1. Analyzing design hierarchy..
+Top module:  \uart_top
+Used module:     \uart_rx_fsm
+Used module:     \uart_tx_fsm
+Used module:     \uart_receiver
+Used module:     \uart_transmitter
+Used module:     \uart_baud_generator
+Parameter \DATA_WIDTH = 8
+
+7.2. Executing AST frontend in derive mode using pre-parsed AST for module `\uart_receiver'.
+Parameter \DATA_WIDTH = 8
+Generating RTLIL representation for module `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Parameter \DATA_WIDTH = 8
+
+7.3. Executing AST frontend in derive mode using pre-parsed AST for module `\uart_transmitter'.
+Parameter \DATA_WIDTH = 8
+Generating RTLIL representation for module `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Parameter \DIVIDER = 4
+
+7.4. Executing AST frontend in derive mode using pre-parsed AST for module `\uart_baud_generator'.
+Parameter \DIVIDER = 4
+Generating RTLIL representation for module `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+
+7.5. Analyzing design hierarchy..
+Top module:  \uart_top
+Used module:     \uart_rx_fsm
+Used module:     \uart_tx_fsm
+Used module:     $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000
+Used module:     $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000
+Used module:     $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100
+
+7.6. Analyzing design hierarchy..
+Top module:  \uart_top
+Used module:     \uart_rx_fsm
+Used module:     \uart_tx_fsm
+Used module:     $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000
+Used module:     $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000
+Used module:     $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100
+Removing unused module `\uart_transmitter'.
+Removing unused module `\uart_receiver'.
+Removing unused module `\uart_baud_generator'.
+Removed 3 unused modules.
+
+8. Executing PROC pass (convert processes to netlists).
+
+8.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+8.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$/project/rtl/uart_tx_fsm.v:28$17 in module uart_tx_fsm.
+Marked 2 switch rules as full_case in process $proc$/project/rtl/uart_baud_generator.v:18$29 in module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.
+Marked 2 switch rules as full_case in process $proc$/project/rtl/uart_rx_fsm.v:22$10 in module uart_rx_fsm.
+Marked 2 switch rules as full_case in process $proc$/project/rtl/uart_transmitter.v:24$24 in module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.
+Marked 2 switch rules as full_case in process $proc$/project/rtl/uart_receiver.v:23$18 in module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.
+Removed a total of 0 dead cases.
+
+8.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 11 redundant assignments.
+Promoted 0 assignments to connections.
+
+8.4. Executing PROC_INIT pass (extract init attributes).
+
+8.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst in `\uart_tx_fsm.$proc$/project/rtl/uart_tx_fsm.v:28$17'.
+Found async reset \rst in `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.$proc$/project/rtl/uart_baud_generator.v:18$29'.
+Found async reset \rst in `\uart_rx_fsm.$proc$/project/rtl/uart_rx_fsm.v:22$10'.
+Found async reset \rst in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_transmitter.v:24$24'.
+Found async reset \rst in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_receiver.v:23$18'.
+
+8.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~17 debug messages>
+
+8.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\uart_tx_fsm.$proc$/project/rtl/uart_tx_fsm.v:28$17'.
+     1/7: $0\done[0:0]
+     2/7: $0\stop_bit[0:0]
+     3/7: $0\shift_enable[0:0]
+     4/7: $0\start_bit[0:0]
+     5/7: $0\load[0:0]
+     6/7: $0\state[2:0]
+     7/7: $0\busy[0:0]
+Creating decoders for process `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.$proc$/project/rtl/uart_baud_generator.v:18$29'.
+     1/2: $0\baud_tick[0:0]
+     2/2: $0\counter[31:0]
+Creating decoders for process `\uart_rx_fsm.$proc$/project/rtl/uart_rx_fsm.v:22$10'.
+     1/4: $0\done[0:0]
+     2/4: $0\sample_enable[0:0]
+     3/4: $0\state[2:0]
+     4/4: $0\busy[0:0]
+Creating decoders for process `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_transmitter.v:24$24'.
+     1/6: $0\done[0:0]
+     2/6: $0\transmitting[0:0]
+     3/6: $0\tx[0:0]
+     4/6: $0\bit_count[3:0]
+     5/6: $0\shift_reg[7:0]
+     6/6: $0\busy[0:0]
+Creating decoders for process `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_receiver.v:23$18'.
+     1/6: $0\done[0:0]
+     2/6: $0\receiving[0:0]
+     3/6: $0\bit_count[3:0]
+     4/6: $0\shift_reg[7:0]
+     5/6: $0\busy[0:0]
+     6/6: $0\rx_data[7:0]
+
+8.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+8.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\uart_tx_fsm.\busy' using process `\uart_tx_fsm.$proc$/project/rtl/uart_tx_fsm.v:28$17'.
+  created $adff cell `$procdff$212' with positive edge clock and positive level reset.
+Creating register for signal `\uart_tx_fsm.\done' using process `\uart_tx_fsm.$proc$/project/rtl/uart_tx_fsm.v:28$17'.
+  created $adff cell `$procdff$215' with positive edge clock and positive level reset.
+Creating register for signal `\uart_tx_fsm.\state' using process `\uart_tx_fsm.$proc$/project/rtl/uart_tx_fsm.v:28$17'.
+  created $adff cell `$procdff$218' with positive edge clock and positive level reset.
+Creating register for signal `\uart_tx_fsm.\load' using process `\uart_tx_fsm.$proc$/project/rtl/uart_tx_fsm.v:28$17'.
+  created $adff cell `$procdff$221' with positive edge clock and positive level reset.
+Creating register for signal `\uart_tx_fsm.\start_bit' using process `\uart_tx_fsm.$proc$/project/rtl/uart_tx_fsm.v:28$17'.
+  created $adff cell `$procdff$224' with positive edge clock and positive level reset.
+Creating register for signal `\uart_tx_fsm.\shift_enable' using process `\uart_tx_fsm.$proc$/project/rtl/uart_tx_fsm.v:28$17'.
+  created $adff cell `$procdff$227' with positive edge clock and positive level reset.
+Creating register for signal `\uart_tx_fsm.\stop_bit' using process `\uart_tx_fsm.$proc$/project/rtl/uart_tx_fsm.v:28$17'.
+  created $adff cell `$procdff$230' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.\baud_tick' using process `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.$proc$/project/rtl/uart_baud_generator.v:18$29'.
+  created $adff cell `$procdff$233' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.\counter' using process `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.$proc$/project/rtl/uart_baud_generator.v:18$29'.
+  created $adff cell `$procdff$236' with positive edge clock and positive level reset.
+Creating register for signal `\uart_rx_fsm.\busy' using process `\uart_rx_fsm.$proc$/project/rtl/uart_rx_fsm.v:22$10'.
+  created $adff cell `$procdff$239' with positive edge clock and positive level reset.
+Creating register for signal `\uart_rx_fsm.\done' using process `\uart_rx_fsm.$proc$/project/rtl/uart_rx_fsm.v:22$10'.
+  created $adff cell `$procdff$242' with positive edge clock and positive level reset.
+Creating register for signal `\uart_rx_fsm.\sample_enable' using process `\uart_rx_fsm.$proc$/project/rtl/uart_rx_fsm.v:22$10'.
+  created $adff cell `$procdff$245' with positive edge clock and positive level reset.
+Creating register for signal `\uart_rx_fsm.\state' using process `\uart_rx_fsm.$proc$/project/rtl/uart_rx_fsm.v:22$10'.
+  created $adff cell `$procdff$248' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.\busy' using process `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_transmitter.v:24$24'.
+  created $adff cell `$procdff$251' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.\done' using process `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_transmitter.v:24$24'.
+  created $adff cell `$procdff$254' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.\shift_reg' using process `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_transmitter.v:24$24'.
+  created $adff cell `$procdff$257' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.\bit_count' using process `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_transmitter.v:24$24'.
+  created $adff cell `$procdff$260' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.\tx' using process `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_transmitter.v:24$24'.
+  created $adff cell `$procdff$263' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.\transmitting' using process `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_transmitter.v:24$24'.
+  created $adff cell `$procdff$266' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.\rx_data' using process `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_receiver.v:23$18'.
+  created $adff cell `$procdff$269' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.\busy' using process `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_receiver.v:23$18'.
+  created $adff cell `$procdff$272' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.\done' using process `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_receiver.v:23$18'.
+  created $adff cell `$procdff$275' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.\shift_reg' using process `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_receiver.v:23$18'.
+  created $adff cell `$procdff$278' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.\bit_count' using process `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_receiver.v:23$18'.
+  created $adff cell `$procdff$281' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.\receiving' using process `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_receiver.v:23$18'.
+  created $adff cell `$procdff$284' with positive edge clock and positive level reset.
+
+8.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+8.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 5 empty switches in `\uart_tx_fsm.$proc$/project/rtl/uart_tx_fsm.v:28$17'.
+Removing empty process `uart_tx_fsm.$proc$/project/rtl/uart_tx_fsm.v:28$17'.
+Found and cleaned up 1 empty switch in `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.$proc$/project/rtl/uart_baud_generator.v:18$29'.
+Removing empty process `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.$proc$/project/rtl/uart_baud_generator.v:18$29'.
+Found and cleaned up 5 empty switches in `\uart_rx_fsm.$proc$/project/rtl/uart_rx_fsm.v:22$10'.
+Removing empty process `uart_rx_fsm.$proc$/project/rtl/uart_rx_fsm.v:22$10'.
+Found and cleaned up 3 empty switches in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_transmitter.v:24$24'.
+Removing empty process `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_transmitter.v:24$24'.
+Found and cleaned up 3 empty switches in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_receiver.v:23$18'.
+Removing empty process `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.$proc$/project/rtl/uart_receiver.v:23$18'.
+Cleaned up 17 empty switches.
+
+8.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_tx_fsm.
+<suppressed ~9 debug messages>
+Optimizing module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.
+<suppressed ~2 debug messages>
+Optimizing module uart_top.
+Optimizing module uart_rx_fsm.
+<suppressed ~8 debug messages>
+Optimizing module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.
+<suppressed ~8 debug messages>
+Optimizing module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.
+<suppressed ~8 debug messages>
+
+9. Executing OPT pass (performing simple optimizations).
+
+9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_tx_fsm.
+Optimizing module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.
+Optimizing module uart_top.
+Optimizing module uart_rx_fsm.
+Optimizing module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.
+Optimizing module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.
+
+9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_tx_fsm'.
+Computing hashes of 31 cells of `\uart_tx_fsm'.
+Finding duplicate cells in `\uart_tx_fsm'.
+Computing hashes of 24 cells of `\uart_tx_fsm'.
+Finding duplicate cells in `\uart_tx_fsm'.
+<suppressed ~21 debug messages>
+Finding identical cells in module `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Computing hashes of 6 cells of `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Finding identical cells in module `\uart_top'.
+Computing hashes of 5 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Finding identical cells in module `\uart_rx_fsm'.
+Computing hashes of 22 cells of `\uart_rx_fsm'.
+Finding duplicate cells in `\uart_rx_fsm'.
+Computing hashes of 18 cells of `\uart_rx_fsm'.
+Finding duplicate cells in `\uart_rx_fsm'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 63 cells of `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 42 cells of `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 40 cells of `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+<suppressed ~69 debug messages>
+Finding identical cells in module `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 53 cells of `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 42 cells of `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 41 cells of `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+<suppressed ~36 debug messages>
+Removed a total of 46 cells.
+
+9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \uart_tx_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \uart_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \uart_rx_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~82 debug messages>
+
+9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \uart_tx_fsm.
+    New ctrl vector for $pmux cell $procmux$74: { $auto$opt_reduce.cc:137:opt_pmux$286 $procmux$76_CMP }
+  Optimizing cells in module \uart_tx_fsm.
+  Optimizing cells in module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.
+  Optimizing cells in module \uart_top.
+  Optimizing cells in module \uart_rx_fsm.
+    New ctrl vector for $pmux cell $procmux$108: { $auto$opt_reduce.cc:137:opt_pmux$288 $procmux$110_CMP }
+  Optimizing cells in module \uart_rx_fsm.
+  Optimizing cells in module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.
+    New ctrl vector for $pmux cell $procmux$126: { $auto$opt_reduce.cc:137:opt_pmux$290 $procmux$139_CTRL $procmux$140_CMP }
+  Optimizing cells in module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.
+  Optimizing cells in module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.
+Performed a total of 3 changes.
+
+9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_tx_fsm'.
+Computing hashes of 25 cells of `\uart_tx_fsm'.
+Finding duplicate cells in `\uart_tx_fsm'.
+Finding identical cells in module `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Computing hashes of 6 cells of `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Finding identical cells in module `\uart_top'.
+Computing hashes of 5 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Finding identical cells in module `\uart_rx_fsm'.
+Computing hashes of 19 cells of `\uart_rx_fsm'.
+Finding duplicate cells in `\uart_rx_fsm'.
+Finding identical cells in module `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 41 cells of `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding identical cells in module `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 41 cells of `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Removed a total of 0 cells.
+
+9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$212 ($adff) from module uart_tx_fsm (D = $procmux$74_Y, Q = \busy).
+Adding EN signal on $procdff$218 ($adff) from module uart_tx_fsm (D = $procmux$61_Y, Q = \state).
+Adding EN signal on $procdff$248 ($adff) from module uart_rx_fsm (D = $procmux$96_Y, Q = \state).
+Adding EN signal on $procdff$239 ($adff) from module uart_rx_fsm (D = $procmux$108_Y, Q = \busy).
+Adding EN signal on $procdff$263 ($adff) from module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000 (D = $procmux$126_Y, Q = \tx).
+Adding EN signal on $procdff$251 ($adff) from module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000 (D = $procmux$160_Y, Q = \busy).
+Adding EN signal on $procdff$260 ($adff) from module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000 (D = $procmux$144_Y, Q = \bit_count).
+Adding EN signal on $procdff$266 ($adff) from module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000 (D = $procmux$124_Y, Q = \transmitting).
+Adding EN signal on $procdff$257 ($adff) from module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000 (D = $procmux$153_Y, Q = \shift_reg).
+Adding EN signal on $procdff$281 ($adff) from module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000 (D = $procmux$184_Y, Q = \bit_count).
+Adding EN signal on $procdff$269 ($adff) from module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000 (D = \shift_reg, Q = \rx_data).
+Adding EN signal on $procdff$278 ($adff) from module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000 (D = { \rx \shift_reg [7:1] }, Q = \shift_reg).
+Adding EN signal on $procdff$272 ($adff) from module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000 (D = $procmux$200_Y, Q = \busy).
+Adding EN signal on $procdff$284 ($adff) from module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000 (D = $procmux$174_Y, Q = \receiving).
+
+9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_tx_fsm..
+Finding unused cells or wires in module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module \uart_top..
+Finding unused cells or wires in module \uart_rx_fsm..
+Finding unused cells or wires in module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000..
+Finding unused cells or wires in module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000..
+Removed 11 unused cells and 123 unused wires.
+<suppressed ~21 debug messages>
+
+9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_tx_fsm.
+<suppressed ~1 debug messages>
+Optimizing module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.
+Optimizing module uart_top.
+Optimizing module uart_rx_fsm.
+<suppressed ~1 debug messages>
+Optimizing module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.
+<suppressed ~9 debug messages>
+Optimizing module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.
+<suppressed ~6 debug messages>
+
+9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \uart_tx_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \uart_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \uart_rx_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~72 debug messages>
+
+9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \uart_tx_fsm.
+  Optimizing cells in module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.
+  Optimizing cells in module \uart_top.
+  Optimizing cells in module \uart_rx_fsm.
+  Optimizing cells in module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.
+  Optimizing cells in module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.
+Performed a total of 0 changes.
+
+9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_tx_fsm'.
+Computing hashes of 31 cells of `\uart_tx_fsm'.
+Finding duplicate cells in `\uart_tx_fsm'.
+Finding identical cells in module `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Computing hashes of 6 cells of `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Finding identical cells in module `\uart_top'.
+Computing hashes of 3 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Finding identical cells in module `\uart_rx_fsm'.
+Computing hashes of 24 cells of `\uart_rx_fsm'.
+Finding duplicate cells in `\uart_rx_fsm'.
+Finding identical cells in module `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 54 cells of `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 49 cells of `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 47 cells of `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 46 cells of `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 45 cells of `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+<suppressed ~27 debug messages>
+Finding identical cells in module `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 48 cells of `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 43 cells of `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 41 cells of `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 40 cells of `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 39 cells of `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+<suppressed ~27 debug messages>
+Removed a total of 18 cells.
+
+9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_tx_fsm..
+Finding unused cells or wires in module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module \uart_top..
+Finding unused cells or wires in module \uart_rx_fsm..
+Finding unused cells or wires in module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000..
+Finding unused cells or wires in module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000..
+Removed 0 unused cells and 16 unused wires.
+<suppressed ~2 debug messages>
+
+9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_tx_fsm.
+Optimizing module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.
+Optimizing module uart_top.
+Optimizing module uart_rx_fsm.
+Optimizing module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.
+Optimizing module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.
+
+9.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \uart_tx_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \uart_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \uart_rx_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~64 debug messages>
+
+9.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \uart_tx_fsm.
+  Optimizing cells in module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.
+  Optimizing cells in module \uart_top.
+  Optimizing cells in module \uart_rx_fsm.
+  Optimizing cells in module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.
+  Optimizing cells in module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.
+Performed a total of 0 changes.
+
+9.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_tx_fsm'.
+Computing hashes of 31 cells of `\uart_tx_fsm'.
+Finding duplicate cells in `\uart_tx_fsm'.
+Finding identical cells in module `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Computing hashes of 6 cells of `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100'.
+Finding identical cells in module `\uart_top'.
+Computing hashes of 3 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Finding identical cells in module `\uart_rx_fsm'.
+Computing hashes of 24 cells of `\uart_rx_fsm'.
+Finding duplicate cells in `\uart_rx_fsm'.
+Finding identical cells in module `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 45 cells of `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding identical cells in module `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Computing hashes of 39 cells of `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Finding duplicate cells in `$paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000'.
+Removed a total of 0 cells.
+
+9.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_tx_fsm..
+Finding unused cells or wires in module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module \uart_top..
+Finding unused cells or wires in module \uart_rx_fsm..
+Finding unused cells or wires in module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000..
+Finding unused cells or wires in module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000..
+
+9.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_tx_fsm.
+Optimizing module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.
+Optimizing module uart_top.
+Optimizing module uart_rx_fsm.
+Optimizing module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.
+Optimizing module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.
+
+9.23. Finished fast OPT passes. (There is nothing left to do.)
+
+10. Executing FLATTEN pass (flatten design).
+Deleting now unused module uart_tx_fsm.
+Deleting now unused module $paramod\uart_baud_generator\DIVIDER=s32'00000000000000000000000000000100.
+Deleting now unused module uart_rx_fsm.
+Deleting now unused module $paramod\uart_transmitter\DATA_WIDTH=s32'00000000000000000000000000001000.
+Deleting now unused module $paramod\uart_receiver\DATA_WIDTH=s32'00000000000000000000000000001000.
+<suppressed ~3 debug messages>
+
+11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_top..
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_top.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_top'.
+Computing hashes of 93 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \uart_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~34 debug messages>
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \uart_top.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_top'.
+Computing hashes of 93 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_top..
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_top.
+
+12.9. Finished fast OPT passes. (There is nothing left to do.)
+
+13. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+14. Executing OPT pass (performing simple optimizations).
+
+14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_top.
+
+14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_top'.
+Computing hashes of 93 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Removed a total of 0 cells.
+
+14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \uart_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~34 debug messages>
+
+14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \uart_top.
+Performed a total of 0 changes.
+
+14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_top'.
+Computing hashes of 93 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Removed a total of 0 cells.
+
+14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_top..
+
+14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_top.
+
+14.9. Finished fast OPT passes. (There is nothing left to do.)
+
+15. Executing TECHMAP pass (map to technology primitives).
+
+15.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/local/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+15.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $logic_and.
+Running "alumacc" on wrapper $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=4:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=4:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=4:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $pmux.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $reduce_or.
+Running "alumacc" on wrapper $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=1:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=1:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=1:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$a7817265ef3ab2ee43da53bbd8a90f6450d412d9\_90_alu for cells of type $alu.
+Using template $paramod$6a42b6fefed750f8a1c58eab59479d960557103c\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $and.
+No more expansions possible.
+<suppressed ~850 debug messages>
+
+16. Executing OPT pass (performing simple optimizations).
+
+16.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_top.
+<suppressed ~1241 debug messages>
+
+16.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_top'.
+Computing hashes of 530 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Computing hashes of 483 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Computing hashes of 463 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+<suppressed ~201 debug messages>
+Removed a total of 67 cells.
+
+16.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \uart_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+16.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \uart_top.
+Performed a total of 0 changes.
+
+16.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_top'.
+Computing hashes of 463 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Removed a total of 0 cells.
+
+16.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+16.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_top..
+Removed 39 unused cells and 574 unused wires.
+<suppressed ~40 debug messages>
+
+16.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_top.
+
+16.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+16.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \uart_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+16.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \uart_top.
+Performed a total of 0 changes.
+
+16.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\uart_top'.
+Computing hashes of 424 cells of `\uart_top'.
+Finding duplicate cells in `\uart_top'.
+Removed a total of 0 cells.
+
+16.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+16.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_top..
+
+16.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module uart_top.
+
+16.16. Finished fast OPT passes. (There is nothing left to do.)
+
+17. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell DFF_X1 (noninv, pins=4, area=4.52) is a direct match for cell type $_DFF_P_.
+  cell DFFR_X1 (noninv, pins=5, area=5.32) is a direct match for cell type $_DFF_PN0_.
+  cell DFFS_X1 (noninv, pins=5, area=5.32) is a direct match for cell type $_DFF_PN1_.
+  cell DFFRS_X1 (noninv, pins=6, area=6.38) is a direct match for cell type $_DFFSR_PNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \DFF_X1 _DFF_P_ (.CK( C), .D( D), .Q( Q), .QN(~Q));
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \DFFR_X1 _DFF_PN0_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN( R));
+    \DFFS_X1 _DFF_PN1_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .SN( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    unmapped dff cell: $_DFFE_NN_
+    unmapped dff cell: $_DFFE_NP_
+    unmapped dff cell: $_DFFE_PN_
+    unmapped dff cell: $_DFFE_PP_
+    unmapped dff cell: $_DFFSR_NNN_
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    \DFFRS_X1 _DFFSR_PNN_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN( R), .SN( S));
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+17.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+<suppressed ~8 debug messages>
+Mapping DFF cells in module `\uart_top':
+  mapped 69 $_DFF_PN0_ cells to \DFFR_X1 cells.
+  mapped 1 $_DFF_PN1_ cells to \DFFS_X1 cells.
+
+18. Executing ABC pass (technology mapping using ABC).
+
+18.1. Extracting gate netlist of module `\uart_top' to `<abc-temp-dir>/input.blif'..
+Replacing 37 occurrences of constant undef bits with constant zero bits
+
+18.1.1. Executed ABC.
+Extracted 456 gates and 550 wires to a netlist network with 91 inputs and 140 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled 0 0)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_scl /tmp/yosys-liberty-scl-cache/yosys_merged_af18ad9b.scl 
+ABC: Warning: Detected 2 multi-output cells (for example, "FA_X1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+18.1.2. Re-integrating ABC results.
+ABC RESULTS:           AND2_X1 cells:        7
+ABC RESULTS:           AND3_X1 cells:        4
+ABC RESULTS:           AND4_X1 cells:        3
+ABC RESULTS:         AOI211_X1 cells:        1
+ABC RESULTS:          AOI21_X1 cells:       19
+ABC RESULTS:         AOI221_X1 cells:        1
+ABC RESULTS:         AOI222_X1 cells:        7
+ABC RESULTS:          AOI22_X1 cells:        3
+ABC RESULTS:            BUF_X1 cells:        1
+ABC RESULTS:            INV_X1 cells:       96
+ABC RESULTS:           MUX2_X1 cells:       16
+ABC RESULTS:          NAND2_X1 cells:       16
+ABC RESULTS:          NAND3_X1 cells:        9
+ABC RESULTS:          NAND4_X1 cells:        6
+ABC RESULTS:           NOR2_X1 cells:       16
+ABC RESULTS:           NOR3_X1 cells:        3
+ABC RESULTS:           NOR4_X1 cells:       16
+ABC RESULTS:         OAI211_X1 cells:        1
+ABC RESULTS:          OAI21_X1 cells:        6
+ABC RESULTS:         OAI221_X1 cells:        1
+ABC RESULTS:          OAI22_X1 cells:        4
+ABC RESULTS:            OR2_X1 cells:        2
+ABC RESULTS:          XNOR2_X1 cells:       14
+ABC RESULTS:           XOR2_X1 cells:       13
+ABC RESULTS:        internal signals:      319
+ABC RESULTS:           input signals:       91
+ABC RESULTS:          output signals:      140
+Removing temp directory.
+Removing global temp directory.
+
+19. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \uart_top..
+Removed 3 unused cells and 390 unused wires.
+<suppressed ~24 debug messages>
+
+20. Printing statistics.
+
+=== uart_top ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      352 wires
+      510 wire bits
+       11 public wires
+       25 public wire bits
+       11 ports
+       25 port bits
+      335 cells
+        7   AND2_X1
+        4   AND3_X1
+        3   AND4_X1
+        1   AOI211_X1
+       19   AOI21_X1
+        1   AOI221_X1
+        7   AOI222_X1
+        3   AOI22_X1
+        1   BUF_X1
+       69   DFFR_X1
+        1   DFFS_X1
+       96   INV_X1
+       16   MUX2_X1
+       16   NAND2_X1
+        9   NAND3_X1
+        6   NAND4_X1
+       16   NOR2_X1
+        3   NOR3_X1
+       16   NOR4_X1
+        1   OAI211_X1
+        6   OAI21_X1
+        1   OAI221_X1
+        4   OAI22_X1
+        2   OR2_X1
+       14   XNOR2_X1
+       13   XOR2_X1
+
+21. Executing Verilog backend.
+
+21.1. Executing BMUXMAP pass.
+
+21.2. Executing DEMUXMAP pass.
+Dumping module `\uart_top'.
+
+End of script. Logfile hash: 99ac40d302, time: 0.34s, user: 0.11s, system: 0.11s, MEM: 42.36 MB peak
+Yosys 0.67 (git sha1 2d1509d1b, Release, GNU /usr/local/bin/wrapped-cc/g++ 11.4.0)
+Time spent: 62% 1x abc (0 sec), 11% 1x dfflibmap (0 sec), ...

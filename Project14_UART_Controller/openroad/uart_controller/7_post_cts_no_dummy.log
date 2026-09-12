@@ -1,0 +1,112 @@
+OpenROAD 26Q3-1080-gab6fd26351 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[WARNING EST-0027] no estimated parasitics. Using wire load models.
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |       426
+       10 |     +0.0% |       0 |       0 |             0 |       416
+       20 |     +0.0% |       0 |       0 |             0 |       406
+       30 |     +0.0% |       0 |       0 |             0 |       396
+       40 |     +0.0% |       0 |       0 |             0 |       386
+       50 |     +0.0% |       0 |       0 |             0 |       376
+       60 |     +0.0% |       0 |       0 |             0 |       366
+       70 |     +0.0% |       0 |       0 |             0 |       356
+       80 |     +0.0% |       0 |       0 |             0 |       346
+       90 |     +0.0% |       0 |       0 |             0 |       336
+      100 |     +0.0% |       0 |       0 |             0 |       326
+      110 |     +0.0% |       0 |       0 |             0 |       316
+      120 |     +0.0% |       0 |       0 |             0 |       306
+      130 |     +0.0% |       0 |       0 |             0 |       296
+      140 |     +0.0% |       0 |       0 |             0 |       286
+      150 |     +0.0% |       0 |       0 |             0 |       276
+      160 |     +0.0% |       0 |       0 |             0 |       266
+      170 |     +0.0% |       0 |       0 |             0 |       256
+      180 |     +0.0% |       0 |       0 |             0 |       246
+      190 |     +0.0% |       0 |       0 |             0 |       236
+      200 |     +0.0% |       0 |       0 |             0 |       226
+      210 |     +0.0% |       0 |       0 |             0 |       216
+      220 |     +0.0% |       0 |       0 |             0 |       206
+      230 |     +0.0% |       0 |       0 |             0 |       196
+      240 |     +0.0% |       0 |       0 |             0 |       186
+      250 |     +0.0% |       0 |       0 |             0 |       176
+      260 |     +0.0% |       0 |       0 |             0 |       166
+      270 |     +0.0% |       0 |       0 |             0 |       156
+      280 |     +0.0% |       0 |       0 |             0 |       146
+      290 |     +0.0% |       0 |       0 |             0 |       136
+      300 |     +0.0% |       0 |       0 |             0 |       126
+      310 |     +0.0% |       0 |       0 |             0 |       116
+      320 |     +0.0% |       0 |       0 |             0 |       106
+      330 |     +0.0% |       0 |       0 |             0 |        96
+      340 |     +0.0% |       0 |       0 |             0 |        86
+      350 |     +0.0% |       0 |       0 |             0 |        76
+      360 |     +0.0% |       0 |       0 |             0 |        66
+      370 |     +0.0% |       0 |       0 |             0 |        56
+      380 |     +0.0% |       0 |       0 |             0 |        46
+      390 |     +0.0% |       0 |       0 |             0 |        36
+      400 |     +0.0% |       0 |       0 |             0 |        26
+      410 |     +0.0% |       0 |       0 |             0 |        16
+      420 |     +0.0% |       0 |       0 |             0 |         6
+    final |     +0.0% |       0 |       0 |             0 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0504] Runtime: 0.09s
+Design area 650 um^2 32% utilization.
+Startpoint: rst (input port clocked by clk)
+Endpoint: _606_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+     Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------
+                     0.000    0.000   clock clk (rise edge)
+                     0.000    0.000   clock network delay (propagated)
+                     2.000    2.000 v input external delay
+ 108.455    0.000    0.000    2.000 v rst (in)
+            0.000    0.000    2.000 v _598_/A (INV_X1)
+   1.356    0.006    0.008    2.008 ^ _598_/ZN (INV_X1)
+            0.006    0.000    2.008 ^ _606_/SN (DFFS_X1)
+                              2.008   data arrival time
+
+                    10.000   10.000   clock clk (rise edge)
+                     0.068   10.068   clock network delay (propagated)
+                    -0.200    9.868   clock uncertainty
+                     0.000    9.868   clock reconvergence pessimism
+                              9.868 ^ _606_/CK (DFFS_X1)
+                     0.046    9.914   library recovery time
+                              9.914   data required time
+---------------------------------------------------------------------------
+                              9.914   data required time
+                             -2.008   data arrival time
+---------------------------------------------------------------------------
+                              7.906   slack (MET)
+
+
+Startpoint: _612_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: tx_busy (output port clocked by clk)
+Path Group: clk
+Path Type: max
+
+     Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------
+                     0.000    0.000   clock clk (rise edge)
+                     0.071    0.071   clock network delay (propagated)
+            0.013    0.000    0.071 ^ _612_/CK (DFFR_X1)
+   5.785    0.018    0.115    0.185 ^ _612_/Q (DFFR_X1)
+            0.018    0.000    0.185 ^ tx_busy (out)
+                              0.185   data arrival time
+
+                    10.000   10.000   clock clk (rise edge)
+                     0.000   10.000   clock network delay (propagated)
+                    -0.200    9.800   clock uncertainty
+                     0.000    9.800   clock reconvergence pessimism
+                    -2.000    7.800   output external delay
+                              7.800   data required time
+---------------------------------------------------------------------------
+                              7.800   data required time
+                             -0.185   data arrival time
+---------------------------------------------------------------------------
+                              7.615   slack (MET)
+
+
+

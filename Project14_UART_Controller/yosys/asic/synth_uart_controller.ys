@@ -1,0 +1,29 @@
+read_verilog /project/rtl/uart_baud_generator.v
+read_verilog /project/rtl/uart_receiver.v
+read_verilog /project/rtl/uart_rx_fsm.v
+read_verilog /project/rtl/uart_top.v
+read_verilog /project/rtl/uart_transmitter.v
+read_verilog /project/rtl/uart_tx_fsm.v
+
+hierarchy -check -top uart_top
+
+proc
+opt
+flatten
+opt_clean
+opt
+memory_map
+opt
+techmap
+opt
+
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+opt_clean -purge
+rename -hide
+clean
+
+stat
+
+write_verilog -noattr -simple-lhs /project/yosys/asic/uart_controller_mapped.v
