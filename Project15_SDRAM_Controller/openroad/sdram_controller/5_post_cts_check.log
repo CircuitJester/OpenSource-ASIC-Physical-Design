@@ -1,0 +1,145 @@
+OpenROAD 26Q3-1080-gab6fd26351 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+===== POST-CTS CLOCK =====
+Clock clk
+   0.07 source latency _322_/CK ^
+  -0.07 target latency _321_/CK ^
+   0.20 clock uncertainty
+   0.00 CRPR
+--------------
+   0.20 setup skew
+
+===== POST-CTS SETUP =====
+[WARNING STA-0168] unknown field nets.
+Startpoint: rst (input port clocked by clk)
+Endpoint: _296_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+Fanout      Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------------
+                            0.000    0.000   clock clk (rise edge)
+                            0.000    0.000   clock network delay (propagated)
+                            2.000    2.000 v input external delay
+     1    1.714    0.000    0.000    2.000 v rst (in)
+                   0.000    0.000    2.000 v input3/A (BUF_X1)
+    11   21.361    0.024    0.049    2.049 v input3/Z (BUF_X1)
+                   0.024    0.001    2.050 v place9/A (BUF_X1)
+    22   44.431    0.047    0.089    2.138 v place9/Z (BUF_X1)
+                   0.047    0.002    2.140 v _282_/A (INV_X1)
+     1    2.060    0.015    0.027    2.167 ^ _282_/ZN (INV_X1)
+                   0.015    0.000    2.167 ^ _296_/RN (DFFR_X1)
+                                     2.167   data arrival time
+
+                           10.000   10.000   clock clk (rise edge)
+                            0.071   10.072   clock network delay (propagated)
+                           -0.200    9.872   clock uncertainty
+                            0.000    9.872   clock reconvergence pessimism
+                                     9.872 ^ _296_/CK (DFFR_X1)
+                            0.057    9.929   library recovery time
+                                     9.929   data required time
+---------------------------------------------------------------------------------
+                                     9.929   data required time
+                                    -2.167   data arrival time
+---------------------------------------------------------------------------------
+                                     7.762   slack (MET)
+
+
+Startpoint: _320_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: we_n (output port clocked by clk)
+Path Group: clk
+Path Type: max
+
+Fanout      Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------------
+                            0.000    0.000   clock clk (rise edge)
+                            0.070    0.070   clock network delay (propagated)
+                   0.013    0.000    0.070 ^ _320_/CK (DFFR_X1)
+     2    2.873    0.008    0.092    0.162 v _320_/Q (DFFR_X1)
+                   0.008    0.000    0.162 v _251_/A3 (OR3_X1)
+     1    1.007    0.012    0.077    0.239 v _251_/ZN (OR3_X1)
+                   0.012    0.000    0.239 v output7/A (BUF_X1)
+     1    0.446    0.004    0.026    0.265 v output7/Z (BUF_X1)
+                   0.004    0.000    0.265 v we_n (out)
+                                     0.265   data arrival time
+
+                           10.000   10.000   clock clk (rise edge)
+                            0.000   10.000   clock network delay (propagated)
+                           -0.200    9.800   clock uncertainty
+                            0.000    9.800   clock reconvergence pessimism
+                           -2.000    7.800   output external delay
+                                     7.800   data required time
+---------------------------------------------------------------------------------
+                                     7.800   data required time
+                                    -0.265   data arrival time
+---------------------------------------------------------------------------------
+                                     7.535   slack (MET)
+
+
+===== POST-CTS HOLD =====
+[WARNING STA-0168] unknown field nets.
+Startpoint: rst (input port clocked by clk)
+Endpoint: _322_ (removal check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: min
+
+Fanout      Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------------
+                            0.000    0.000   clock clk (rise edge)
+                            0.000    0.000   clock network delay (propagated)
+                            2.000    2.000 v input external delay
+     1    1.714    0.000    0.000    2.000 v rst (in)
+                   0.000    0.000    2.000 v input3/A (BUF_X1)
+    11   21.361    0.024    0.049    2.049 v input3/Z (BUF_X1)
+                   0.024    0.001    2.050 v _170_/A (INV_X1)
+     1    1.956    0.011    0.019    2.069 ^ _170_/ZN (INV_X1)
+                   0.011    0.000    2.069 ^ _322_/RN (DFFR_X1)
+                                     2.069   data arrival time
+
+                            0.000    0.000   clock clk (rise edge)
+                            0.072    0.072   clock network delay (propagated)
+                            0.200    0.272   clock uncertainty
+                            0.000    0.272   clock reconvergence pessimism
+                                     0.272 ^ _322_/CK (DFFR_X1)
+                            0.198    0.470   library removal time
+                                     0.470   data required time
+---------------------------------------------------------------------------------
+                                     0.470   data required time
+                                    -2.069   data arrival time
+---------------------------------------------------------------------------------
+                                     1.599   slack (MET)
+
+
+Startpoint: _292_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _292_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout      Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------------
+                            0.000    0.000   clock clk (rise edge)
+                            0.072    0.072   clock network delay (propagated)
+                   0.014    0.000    0.072 ^ _292_/CK (DFFR_X1)
+     2    2.488    0.012    0.073    0.145 ^ _292_/QN (DFFR_X1)
+                   0.012    0.000    0.145 ^ _292_/D (DFFR_X1)
+                                     0.145   data arrival time
+
+                            0.000    0.000   clock clk (rise edge)
+                            0.072    0.072   clock network delay (propagated)
+                            0.200    0.272   clock uncertainty
+                            0.000    0.272   clock reconvergence pessimism
+                                     0.272 ^ _292_/CK (DFFR_X1)
+                            0.010    0.282   library hold time
+                                     0.282   data required time
+---------------------------------------------------------------------------------
+                                     0.282   data required time
+                                    -0.145   data arrival time
+---------------------------------------------------------------------------------
+                                    -0.137   slack (VIOLATED)
+
+
+===== POST-CTS AREA =====
+Design area 315 um^2 35% utilization.
+

@@ -1,0 +1,31 @@
+read_verilog /project/rtl/sdram_command_generator.v
+read_verilog /project/rtl/sdram_init_fsm.v
+read_verilog /project/rtl/sdram_main_fsm.v
+read_verilog /project/rtl/sdram_read_controller.v
+read_verilog /project/rtl/sdram_refresh_controller.v
+read_verilog /project/rtl/sdram_timing_generator.v
+read_verilog /project/rtl/sdram_top.v
+read_verilog /project/rtl/sdram_write_controller.v
+
+hierarchy -check -top sdram_top
+
+proc
+opt
+flatten
+opt_clean
+opt
+memory_map
+opt
+techmap
+opt
+
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+opt_clean -purge
+rename -hide
+clean
+
+stat
+
+write_verilog -noattr -simple-lhs /project/yosys/asic/sdram_controller_mapped.v
