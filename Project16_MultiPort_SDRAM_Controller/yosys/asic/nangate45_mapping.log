@@ -1,0 +1,947 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.67 (git sha1 2d1509d1b, Release, GNU /usr/local/bin/wrapped-cc/g++ 11.4.0)
+
+-- Executing script file `/project/yosys/asic/synth_nangate45.ys' --
+
+1. Executing Verilog-2005 frontend: /project/rtl/arbiter_fsm.v
+Parsing Verilog input from `/project/rtl/arbiter_fsm.v' to AST representation.
+Generating RTLIL representation for module `\arbiter_fsm'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: /project/rtl/bus_multiplexer.v
+Parsing Verilog input from `/project/rtl/bus_multiplexer.v' to AST representation.
+Generating RTLIL representation for module `\bus_multiplexer'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: /project/rtl/priority_encoder.v
+Parsing Verilog input from `/project/rtl/priority_encoder.v' to AST representation.
+Generating RTLIL representation for module `\priority_encoder'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: /project/rtl/request_fifo.v
+Parsing Verilog input from `/project/rtl/request_fifo.v' to AST representation.
+Generating RTLIL representation for module `\request_fifo'.
+Warning: Replacing memory \fifo with list of registers. See /project/rtl/request_fifo.v:48
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: /project/rtl/round_robin_arbiter.v
+Parsing Verilog input from `/project/rtl/round_robin_arbiter.v' to AST representation.
+Generating RTLIL representation for module `\round_robin_arbiter'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: /project/rtl/multi_port_sdram_top.v
+Parsing Verilog input from `/project/rtl/multi_port_sdram_top.v' to AST representation.
+Generating RTLIL representation for module `\multi_port_sdram_top'.
+Successfully finished Verilog frontend.
+
+7. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1. Analyzing design hierarchy..
+Top module:  \multi_port_sdram_top
+Used module:     \arbiter_fsm
+Used module:     \round_robin_arbiter
+
+7.2. Analyzing design hierarchy..
+Top module:  \multi_port_sdram_top
+Used module:     \arbiter_fsm
+Used module:     \round_robin_arbiter
+Removing unused module `\request_fifo'.
+Removing unused module `\priority_encoder'.
+Removing unused module `\bus_multiplexer'.
+Removed 3 unused modules.
+
+8. Executing PROC pass (convert processes to netlists).
+
+8.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+8.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 14 switch rules as full_case in process $proc$/project/rtl/round_robin_arbiter.v:17$30 in module round_robin_arbiter.
+Marked 2 switch rules as full_case in process $proc$/project/rtl/arbiter_fsm.v:20$1 in module arbiter_fsm.
+Removed a total of 0 dead cases.
+
+8.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 4 redundant assignments.
+Promoted 0 assignments to connections.
+
+8.4. Executing PROC_INIT pass (extract init attributes).
+
+8.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst in `\round_robin_arbiter.$proc$/project/rtl/round_robin_arbiter.v:17$30'.
+Found async reset \rst in `\arbiter_fsm.$proc$/project/rtl/arbiter_fsm.v:20$1'.
+
+8.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~20 debug messages>
+
+8.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\round_robin_arbiter.$proc$/project/rtl/round_robin_arbiter.v:17$30'.
+     1/3: $0\valid[0:0]
+     2/3: $0\pointer[1:0]
+     3/3: $0\grant[1:0]
+Creating decoders for process `\arbiter_fsm.$proc$/project/rtl/arbiter_fsm.v:20$1'.
+     1/4: $0\done[0:0]
+     2/4: $0\grant_enable[0:0]
+     3/4: $0\read_fifo[0:0]
+     4/4: $0\state[1:0]
+
+8.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+8.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\round_robin_arbiter.\grant' using process `\round_robin_arbiter.$proc$/project/rtl/round_robin_arbiter.v:17$30'.
+  created $adff cell `$procdff$201' with positive edge clock and positive level reset.
+Creating register for signal `\round_robin_arbiter.\valid' using process `\round_robin_arbiter.$proc$/project/rtl/round_robin_arbiter.v:17$30'.
+  created $adff cell `$procdff$204' with positive edge clock and positive level reset.
+Creating register for signal `\round_robin_arbiter.\pointer' using process `\round_robin_arbiter.$proc$/project/rtl/round_robin_arbiter.v:17$30'.
+  created $adff cell `$procdff$207' with positive edge clock and positive level reset.
+Creating register for signal `\arbiter_fsm.\read_fifo' using process `\arbiter_fsm.$proc$/project/rtl/arbiter_fsm.v:20$1'.
+  created $adff cell `$procdff$210' with positive edge clock and positive level reset.
+Creating register for signal `\arbiter_fsm.\grant_enable' using process `\arbiter_fsm.$proc$/project/rtl/arbiter_fsm.v:20$1'.
+  created $adff cell `$procdff$213' with positive edge clock and positive level reset.
+Creating register for signal `\arbiter_fsm.\done' using process `\arbiter_fsm.$proc$/project/rtl/arbiter_fsm.v:20$1'.
+  created $adff cell `$procdff$216' with positive edge clock and positive level reset.
+Creating register for signal `\arbiter_fsm.\state' using process `\arbiter_fsm.$proc$/project/rtl/arbiter_fsm.v:20$1'.
+  created $adff cell `$procdff$219' with positive edge clock and positive level reset.
+
+8.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+8.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 17 empty switches in `\round_robin_arbiter.$proc$/project/rtl/round_robin_arbiter.v:17$30'.
+Removing empty process `round_robin_arbiter.$proc$/project/rtl/round_robin_arbiter.v:17$30'.
+Found and cleaned up 3 empty switches in `\arbiter_fsm.$proc$/project/rtl/arbiter_fsm.v:20$1'.
+Removing empty process `arbiter_fsm.$proc$/project/rtl/arbiter_fsm.v:20$1'.
+Cleaned up 20 empty switches.
+
+8.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+<suppressed ~6 debug messages>
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+<suppressed ~5 debug messages>
+
+9. Executing OPT pass (performing simple optimizations).
+
+9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+
+9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\round_robin_arbiter'.
+Computing hashes of 66 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Computing hashes of 58 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+<suppressed ~24 debug messages>
+Finding identical cells in module `\multi_port_sdram_top'.
+Computing hashes of 5 cells of `\multi_port_sdram_top'.
+Finding duplicate cells in `\multi_port_sdram_top'.
+Finding identical cells in module `\arbiter_fsm'.
+Computing hashes of 17 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Computing hashes of 14 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+<suppressed ~9 debug messages>
+Removed a total of 11 cells.
+
+9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \round_robin_arbiter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \multi_port_sdram_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \arbiter_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~64 debug messages>
+
+9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \round_robin_arbiter.
+  Optimizing cells in module \multi_port_sdram_top.
+  Optimizing cells in module \arbiter_fsm.
+Performed a total of 0 changes.
+
+9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\round_robin_arbiter'.
+Computing hashes of 58 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Finding identical cells in module `\multi_port_sdram_top'.
+Computing hashes of 5 cells of `\multi_port_sdram_top'.
+Finding duplicate cells in `\multi_port_sdram_top'.
+Finding identical cells in module `\arbiter_fsm'.
+Computing hashes of 14 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Removed a total of 0 cells.
+
+9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$201 ($adff) from module round_robin_arbiter (D = $procmux$143_Y, Q = \grant).
+Adding EN signal on $procdff$207 ($adff) from module round_robin_arbiter (D = $procmux$94_Y, Q = \pointer).
+Adding EN signal on $procdff$219 ($adff) from module arbiter_fsm (D = $procmux$190_Y, Q = \state).
+
+9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \round_robin_arbiter..
+Finding unused cells or wires in module \multi_port_sdram_top..
+Finding unused cells or wires in module \arbiter_fsm..
+Removed 0 unused cells and 76 unused wires.
+<suppressed ~3 debug messages>
+
+9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+<suppressed ~2 debug messages>
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+<suppressed ~1 debug messages>
+
+9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \round_robin_arbiter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \multi_port_sdram_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \arbiter_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~64 debug messages>
+
+9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \round_robin_arbiter.
+  Optimizing cells in module \multi_port_sdram_top.
+  Optimizing cells in module \arbiter_fsm.
+Performed a total of 0 changes.
+
+9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\round_robin_arbiter'.
+Computing hashes of 70 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Computing hashes of 65 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Computing hashes of 64 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+<suppressed ~18 debug messages>
+Finding identical cells in module `\multi_port_sdram_top'.
+Computing hashes of 5 cells of `\multi_port_sdram_top'.
+Finding duplicate cells in `\multi_port_sdram_top'.
+Finding identical cells in module `\arbiter_fsm'.
+Computing hashes of 18 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Removed a total of 6 cells.
+
+9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \round_robin_arbiter..
+Finding unused cells or wires in module \multi_port_sdram_top..
+Finding unused cells or wires in module \arbiter_fsm..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~1 debug messages>
+
+9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+
+9.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \round_robin_arbiter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \multi_port_sdram_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \arbiter_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~64 debug messages>
+
+9.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \round_robin_arbiter.
+  Optimizing cells in module \multi_port_sdram_top.
+  Optimizing cells in module \arbiter_fsm.
+Performed a total of 0 changes.
+
+9.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\round_robin_arbiter'.
+Computing hashes of 64 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Finding identical cells in module `\multi_port_sdram_top'.
+Computing hashes of 5 cells of `\multi_port_sdram_top'.
+Finding duplicate cells in `\multi_port_sdram_top'.
+Finding identical cells in module `\arbiter_fsm'.
+Computing hashes of 18 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Removed a total of 0 cells.
+
+9.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \round_robin_arbiter..
+Finding unused cells or wires in module \multi_port_sdram_top..
+Finding unused cells or wires in module \arbiter_fsm..
+
+9.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+
+9.23. Finished fast OPT passes. (There is nothing left to do.)
+
+10. Executing FSM pass (extract and optimize FSM).
+
+10.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+10.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+10.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+10.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \round_robin_arbiter..
+Finding unused cells or wires in module \multi_port_sdram_top..
+Finding unused cells or wires in module \arbiter_fsm..
+
+10.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+10.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+10.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+10.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+11. Executing OPT pass (performing simple optimizations).
+
+11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+
+11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\round_robin_arbiter'.
+Computing hashes of 64 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Finding identical cells in module `\multi_port_sdram_top'.
+Computing hashes of 5 cells of `\multi_port_sdram_top'.
+Finding duplicate cells in `\multi_port_sdram_top'.
+Finding identical cells in module `\arbiter_fsm'.
+Computing hashes of 18 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Removed a total of 0 cells.
+
+11.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \round_robin_arbiter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \multi_port_sdram_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \arbiter_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~64 debug messages>
+
+11.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \round_robin_arbiter.
+  Optimizing cells in module \multi_port_sdram_top.
+  Optimizing cells in module \arbiter_fsm.
+Performed a total of 0 changes.
+
+11.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\round_robin_arbiter'.
+Computing hashes of 64 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Finding identical cells in module `\multi_port_sdram_top'.
+Computing hashes of 5 cells of `\multi_port_sdram_top'.
+Finding duplicate cells in `\multi_port_sdram_top'.
+Finding identical cells in module `\arbiter_fsm'.
+Computing hashes of 18 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Removed a total of 0 cells.
+
+11.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \round_robin_arbiter..
+Finding unused cells or wires in module \multi_port_sdram_top..
+Finding unused cells or wires in module \arbiter_fsm..
+
+11.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+
+11.9. Finished fast OPT passes. (There is nothing left to do.)
+
+12. Executing MEMORY pass.
+
+12.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+12.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+12.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+12.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+12.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+12.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \round_robin_arbiter..
+Finding unused cells or wires in module \multi_port_sdram_top..
+Finding unused cells or wires in module \arbiter_fsm..
+
+12.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+12.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+12.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \round_robin_arbiter..
+Finding unused cells or wires in module \multi_port_sdram_top..
+Finding unused cells or wires in module \arbiter_fsm..
+
+12.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+12.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+13. Executing OPT pass (performing simple optimizations).
+
+13.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+
+13.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\round_robin_arbiter'.
+Computing hashes of 64 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Finding identical cells in module `\multi_port_sdram_top'.
+Computing hashes of 5 cells of `\multi_port_sdram_top'.
+Finding duplicate cells in `\multi_port_sdram_top'.
+Finding identical cells in module `\arbiter_fsm'.
+Computing hashes of 18 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Removed a total of 0 cells.
+
+13.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \round_robin_arbiter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \multi_port_sdram_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \arbiter_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~64 debug messages>
+
+13.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \round_robin_arbiter.
+  Optimizing cells in module \multi_port_sdram_top.
+  Optimizing cells in module \arbiter_fsm.
+Performed a total of 0 changes.
+
+13.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\round_robin_arbiter'.
+Computing hashes of 64 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Finding identical cells in module `\multi_port_sdram_top'.
+Computing hashes of 5 cells of `\multi_port_sdram_top'.
+Finding duplicate cells in `\multi_port_sdram_top'.
+Finding identical cells in module `\arbiter_fsm'.
+Computing hashes of 18 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Removed a total of 0 cells.
+
+13.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+13.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \round_robin_arbiter..
+Finding unused cells or wires in module \multi_port_sdram_top..
+Finding unused cells or wires in module \arbiter_fsm..
+
+13.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+
+13.9. Finished fast OPT passes. (There is nothing left to do.)
+
+14. Executing TECHMAP pass (map to technology primitives).
+
+14.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/local/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+14.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $pmux.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $or.
+No more expansions possible.
+<suppressed ~162 debug messages>
+
+15. Executing OPT pass (performing simple optimizations).
+
+15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+<suppressed ~34 debug messages>
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+<suppressed ~22 debug messages>
+
+15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\round_robin_arbiter'.
+Computing hashes of 165 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Computing hashes of 143 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Computing hashes of 133 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+<suppressed ~96 debug messages>
+Finding identical cells in module `\multi_port_sdram_top'.
+Computing hashes of 5 cells of `\multi_port_sdram_top'.
+Finding duplicate cells in `\multi_port_sdram_top'.
+Finding identical cells in module `\arbiter_fsm'.
+Computing hashes of 43 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Computing hashes of 35 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Computing hashes of 33 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+<suppressed ~30 debug messages>
+Removed a total of 42 cells.
+
+15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \round_robin_arbiter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \multi_port_sdram_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \arbiter_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \round_robin_arbiter.
+  Optimizing cells in module \multi_port_sdram_top.
+  Optimizing cells in module \arbiter_fsm.
+Performed a total of 0 changes.
+
+15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\round_robin_arbiter'.
+Computing hashes of 133 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Finding identical cells in module `\multi_port_sdram_top'.
+Computing hashes of 5 cells of `\multi_port_sdram_top'.
+Finding duplicate cells in `\multi_port_sdram_top'.
+Finding identical cells in module `\arbiter_fsm'.
+Computing hashes of 33 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Removed a total of 0 cells.
+
+15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \round_robin_arbiter..
+Finding unused cells or wires in module \multi_port_sdram_top..
+Finding unused cells or wires in module \arbiter_fsm..
+Removed 0 unused cells and 69 unused wires.
+<suppressed ~2 debug messages>
+
+15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+
+15.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+15.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \round_robin_arbiter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \multi_port_sdram_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \arbiter_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+15.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \round_robin_arbiter.
+  Optimizing cells in module \multi_port_sdram_top.
+  Optimizing cells in module \arbiter_fsm.
+Performed a total of 0 changes.
+
+15.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\round_robin_arbiter'.
+Computing hashes of 133 cells of `\round_robin_arbiter'.
+Finding duplicate cells in `\round_robin_arbiter'.
+Finding identical cells in module `\multi_port_sdram_top'.
+Computing hashes of 5 cells of `\multi_port_sdram_top'.
+Finding duplicate cells in `\multi_port_sdram_top'.
+Finding identical cells in module `\arbiter_fsm'.
+Computing hashes of 33 cells of `\arbiter_fsm'.
+Finding duplicate cells in `\arbiter_fsm'.
+Removed a total of 0 cells.
+
+15.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \round_robin_arbiter..
+Finding unused cells or wires in module \multi_port_sdram_top..
+Finding unused cells or wires in module \arbiter_fsm..
+
+15.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module round_robin_arbiter.
+Optimizing module multi_port_sdram_top.
+Optimizing module arbiter_fsm.
+
+15.16. Finished fast OPT passes. (There is nothing left to do.)
+
+16. Executing ABC pass (technology mapping using ABC).
+
+16.1. Extracting gate netlist of module `\round_robin_arbiter' to `<abc-temp-dir>/input.blif'..
+Replacing 12 occurrences of constant undef bits with constant zero bits
+
+16.1.1. Executed ABC.
+Extracted 128 gates and 137 wires to a netlist network with 6 inputs and 6 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled 0 0)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_scl /tmp/yosys-liberty-scl-cache/yosys_merged_af18ad9b.scl 
+ABC: Warning: Detected 2 multi-output cells (for example, "FA_X1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+16.1.2. Re-integrating ABC results.
+ABC RESULTS:          AOI21_X1 cells:        5
+ABC RESULTS:            INV_X1 cells:        5
+ABC RESULTS:          NAND2_X1 cells:        2
+ABC RESULTS:          NAND3_X1 cells:        3
+ABC RESULTS:           NOR2_X1 cells:        4
+ABC RESULTS:           NOR3_X1 cells:        2
+ABC RESULTS:         OAI211_X1 cells:        1
+ABC RESULTS:          OAI21_X1 cells:        5
+ABC RESULTS:          OAI22_X1 cells:        1
+ABC RESULTS:          OAI33_X1 cells:        1
+ABC RESULTS:        internal signals:      125
+ABC RESULTS:           input signals:        6
+ABC RESULTS:          output signals:        6
+Removing temp directory.
+
+16.2. Extracting gate netlist of module `\multi_port_sdram_top' to `<abc-temp-dir>/input.blif'..
+ABC: using cached merged SCL: /tmp/yosys-liberty-scl-cache/yosys_merged_af18ad9b.scl (1 files)
+
+16.2.1. Executed ABC.
+Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 1 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled 0 0)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_scl /tmp/yosys-liberty-scl-cache/yosys_merged_af18ad9b.scl 
+ABC: Warning: Detected 2 multi-output cells (for example, "FA_X1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+16.2.2. Re-integrating ABC results.
+ABC RESULTS:            OR4_X1 cells:        1
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:        1
+Removing temp directory.
+
+16.3. Extracting gate netlist of module `\arbiter_fsm' to `<abc-temp-dir>/input.blif'..
+ABC: using cached merged SCL: /tmp/yosys-liberty-scl-cache/yosys_merged_af18ad9b.scl (1 files)
+Replacing 5 occurrences of constant undef bits with constant zero bits
+
+16.3.1. Executed ABC.
+Extracted 28 gates and 35 wires to a netlist network with 4 inputs and 6 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled 0 0)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_scl /tmp/yosys-liberty-scl-cache/yosys_merged_af18ad9b.scl 
+ABC: Warning: Detected 2 multi-output cells (for example, "FA_X1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+16.3.2. Re-integrating ABC results.
+ABC RESULTS:           AND2_X1 cells:        2
+ABC RESULTS:          AOI22_X1 cells:        1
+ABC RESULTS:            INV_X1 cells:        3
+ABC RESULTS:          NAND2_X1 cells:        2
+ABC RESULTS:          NAND3_X1 cells:        1
+ABC RESULTS:           NOR2_X1 cells:        2
+ABC RESULTS:          OAI21_X1 cells:        1
+ABC RESULTS:        internal signals:       25
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:        6
+Removing temp directory.
+Removing global temp directory.
+
+17. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell DFF_X1 (noninv, pins=4, area=4.52) is a direct match for cell type $_DFF_P_.
+  cell DFFR_X1 (noninv, pins=5, area=5.32) is a direct match for cell type $_DFF_PN0_.
+  cell DFFS_X1 (noninv, pins=5, area=5.32) is a direct match for cell type $_DFF_PN1_.
+  cell DFFRS_X1 (noninv, pins=6, area=6.38) is a direct match for cell type $_DFFSR_PNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \DFF_X1 _DFF_P_ (.CK( C), .D( D), .Q( Q), .QN(~Q));
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \DFFR_X1 _DFF_PN0_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN( R));
+    \DFFS_X1 _DFF_PN1_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .SN( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    unmapped dff cell: $_DFFE_NN_
+    unmapped dff cell: $_DFFE_NP_
+    unmapped dff cell: $_DFFE_PN_
+    unmapped dff cell: $_DFFE_PP_
+    unmapped dff cell: $_DFFSR_NNN_
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    \DFFRS_X1 _DFFSR_PNN_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN( R), .SN( S));
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+17.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+<suppressed ~8 debug messages>
+Mapping DFF cells in module `\round_robin_arbiter':
+  mapped 5 $_DFF_PN0_ cells to \DFFR_X1 cells.
+Mapping DFF cells in module `\multi_port_sdram_top':
+Mapping DFF cells in module `\arbiter_fsm':
+  mapped 5 $_DFF_PN0_ cells to \DFFR_X1 cells.
+
+18. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \round_robin_arbiter..
+Finding unused cells or wires in module \multi_port_sdram_top..
+Finding unused cells or wires in module \arbiter_fsm..
+Removed 0 unused cells and 140 unused wires.
+<suppressed ~4 debug messages>
+
+19. Printing statistics.
+
+=== round_robin_arbiter ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       50 wires
+       54 wire bits
+        9 public wires
+       11 public wire bits
+        8 ports
+        9 port bits
+       43 cells
+        4   $_MUX_
+        5   $_NOT_
+        5   AOI21_X1
+        5   DFFR_X1
+        5   INV_X1
+        2   NAND2_X1
+        3   NAND3_X1
+        4   NOR2_X1
+        2   NOR3_X1
+        1   OAI211_X1
+        5   OAI21_X1
+        1   OAI22_X1
+        1   OAI33_X1
+
+=== multi_port_sdram_top ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       11 wires
+       12 wire bits
+       11 public wires
+       12 public wire bits
+        8 ports
+        9 port bits
+        1 cells
+        1   OR4_X1
+        2 submodules
+        1   arbiter_fsm
+        1   round_robin_arbiter
+
+=== arbiter_fsm ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       31 wires
+       33 wire bits
+        8 public wires
+        9 public wire bits
+        7 ports
+        7 port bits
+       24 cells
+        2   $_MUX_
+        5   $_NOT_
+        2   AND2_X1
+        1   AOI22_X1
+        5   DFFR_X1
+        3   INV_X1
+        2   NAND2_X1
+        1   NAND3_X1
+        2   NOR2_X1
+        1   OAI21_X1
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+       68 multi_port_sdram_top
+       24 arbiter_fsm
+       43 round_robin_arbiter
+
+        +----------Count including submodules.
+        | 
+       92 wires
+       99 wire bits
+       28 public wires
+       32 public wire bits
+       23 ports
+       25 port bits
+        - memories
+        - memory bits
+        - processes
+       68 cells
+        6   $_MUX_
+       10   $_NOT_
+        2   AND2_X1
+        5   AOI21_X1
+        1   AOI22_X1
+       10   DFFR_X1
+        8   INV_X1
+        4   NAND2_X1
+        4   NAND3_X1
+        6   NOR2_X1
+        2   NOR3_X1
+        1   OAI211_X1
+        6   OAI21_X1
+        1   OAI22_X1
+        1   OAI33_X1
+        1   OR4_X1
+        2 submodules
+        1   arbiter_fsm
+        1   round_robin_arbiter
+
+20. Executing Verilog backend.
+
+20.1. Executing BMUXMAP pass.
+
+20.2. Executing DEMUXMAP pass.
+Dumping module `\arbiter_fsm'.
+Dumping module `\multi_port_sdram_top'.
+Dumping module `\round_robin_arbiter'.
+
+Warnings: 1 unique messages, 1 total
+End of script. Logfile hash: f8b3b85eb1, time: 0.97s, user: 0.21s, system: 0.13s, MEM: 42.19 MB peak
+Yosys 0.67 (git sha1 2d1509d1b, Release, GNU /usr/local/bin/wrapped-cc/g++ 11.4.0)
+Time spent: 75% 1x abc (0 sec), 9% 1x dfflibmap (0 sec), ...

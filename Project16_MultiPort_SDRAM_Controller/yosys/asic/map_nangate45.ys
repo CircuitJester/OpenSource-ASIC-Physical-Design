@@ -1,0 +1,19 @@
+read_verilog /project/yosys/asic/multi_port_sdram_top_netlist.v
+
+hierarchy -check -top multi_port_sdram_top
+
+proc
+opt
+flatten
+opt_clean
+opt
+
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+opt_clean -purge
+clean
+
+stat
+
+write_verilog -noattr -simple-lhs /project/yosys/asic/multi_port_sdram_top_mapped.v

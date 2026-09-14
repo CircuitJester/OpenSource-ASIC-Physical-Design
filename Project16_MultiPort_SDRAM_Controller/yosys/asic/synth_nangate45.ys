@@ -1,0 +1,29 @@
+read_verilog /project/rtl/arbiter_fsm.v
+read_verilog /project/rtl/bus_multiplexer.v
+read_verilog /project/rtl/priority_encoder.v
+read_verilog /project/rtl/request_fifo.v
+read_verilog /project/rtl/round_robin_arbiter.v
+read_verilog /project/rtl/multi_port_sdram_top.v
+
+hierarchy -top multi_port_sdram_top
+
+proc
+opt
+fsm
+opt
+memory
+opt
+
+techmap
+opt
+
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+opt_clean -purge
+clean
+
+stat
+
+write_verilog -noattr -simple-lhs /project/yosys/asic/multi_port_sdram_top_mapped.v
