@@ -1,0 +1,27 @@
+read_verilog rtl/interrupt_controller_fsm.v
+read_verilog rtl/interrupt_controller_top.v
+read_verilog rtl/interrupt_mask_register.v
+read_verilog rtl/interrupt_priority_encoder.v
+read_verilog rtl/interrupt_request_register.v
+
+hierarchy -top interrupt_controller_top
+
+proc
+flatten
+opt
+fsm
+opt
+memory
+opt
+
+techmap
+opt
+
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+clean
+
+write_verilog -noattr yosys/asic/interrupt_controller_top_mapped.v
+stat

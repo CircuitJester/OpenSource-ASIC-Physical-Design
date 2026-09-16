@@ -1,0 +1,50 @@
+Project 18 — Interrupt Controller
+Technology: Nangate45
+Clock Period: 10 ns
+
+Physical Design
+----------------
+Die Area: 35 x 35 um
+Core Area: 31 x 31 um
+Final Design Area: 250 um^2
+Final Utilization: 28%
+
+Routing
+----------------
+Detailed Routing: Completed
+Antenna Net Violations: 0
+Antenna Pin Violations: 0
+
+Timing
+----------------
+Post-Route Setup WNS: +7.38 ns
+Post-Route Setup TNS: 0.00 ns
+Post-Route Hold WNS: -0.03 ns
+Worst Hold Violation: 30 ps
+
+Parasitic Extraction
+----------------
+Extracted Nets: 194
+RC Segments: 442
+Extracted RSEGs: 616
+
+Power Integrity
+----------------
+VDD Worst IR Drop: 0.03%
+VSS Worst IR Drop: 0.05%
+
+Physical Verification
+----------------
+KLayout FreePDK45 DRC: Completed
+DRC Rule Deck Errors/Violations Reported: None
+GDS Cell Matching: Passed
+Orphan Cells: 0
+
+Final Artifacts
+----------------
+6_final.def
+6_final.gds
+6_final.odb
+6_final.sdc
+6_final.spef
+6_final.v
