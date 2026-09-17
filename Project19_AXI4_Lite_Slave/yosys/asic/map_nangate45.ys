@@ -1,0 +1,27 @@
+read_verilog rtl/address_decoder.v
+read_verilog rtl/axi_read_channel.v
+read_verilog rtl/axi_slave_top.v
+read_verilog rtl/axi_write_channel.v
+read_verilog rtl/register_file.v
+
+hierarchy -top axi_slave_top
+
+proc
+flatten
+opt
+fsm
+opt
+memory
+opt
+
+techmap
+opt
+
+abc -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+dfflibmap -liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+clean
+
+write_verilog -noattr yosys/asic/axi_slave_top_mapped.v
+stat
