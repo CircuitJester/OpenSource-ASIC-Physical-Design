@@ -1,0 +1,24 @@
+read_verilog \
+  Project20_DMA_Controller/rtl/dma_address_generator.v \
+  Project20_DMA_Controller/rtl/dma_control_register.v \
+  Project20_DMA_Controller/rtl/dma_controller_fsm.v \
+  Project20_DMA_Controller/rtl/dma_top.v \
+  Project20_DMA_Controller/rtl/dma_transfer_counter.v
+
+hierarchy -top dma_top
+
+proc
+opt
+fsm
+opt
+memory
+opt
+techmap
+opt
+
+abc -liberty Project20_DMA_Controller/liberty/NangateOpenCellLibrary_typical.lib
+
+clean
+write_verilog -noattr Project20_DMA_Controller/yosys/asic/dma_top_mapped.v
+
+stat

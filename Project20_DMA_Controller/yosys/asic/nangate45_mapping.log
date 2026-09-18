@@ -1,0 +1,1262 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `Project20_DMA_Controller/yosys/asic/map_nangate45.ys' --
+
+1. Executing Verilog-2005 frontend: Project20_DMA_Controller/rtl/dma_address_generator.v
+Parsing Verilog input from `Project20_DMA_Controller/rtl/dma_address_generator.v' to AST representation.
+Generating RTLIL representation for module `\dma_address_generator'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: Project20_DMA_Controller/rtl/dma_control_register.v
+Parsing Verilog input from `Project20_DMA_Controller/rtl/dma_control_register.v' to AST representation.
+Generating RTLIL representation for module `\dma_control_register'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: Project20_DMA_Controller/rtl/dma_controller_fsm.v
+Parsing Verilog input from `Project20_DMA_Controller/rtl/dma_controller_fsm.v' to AST representation.
+Generating RTLIL representation for module `\dma_controller_fsm'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: Project20_DMA_Controller/rtl/dma_top.v
+Parsing Verilog input from `Project20_DMA_Controller/rtl/dma_top.v' to AST representation.
+Generating RTLIL representation for module `\dma_top'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: Project20_DMA_Controller/rtl/dma_transfer_counter.v
+Parsing Verilog input from `Project20_DMA_Controller/rtl/dma_transfer_counter.v' to AST representation.
+Generating RTLIL representation for module `\dma_transfer_counter'.
+Successfully finished Verilog frontend.
+
+6. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1. Analyzing design hierarchy..
+Top module:  \dma_top
+Used module:     \dma_controller_fsm
+Used module:     \dma_transfer_counter
+Used module:     \dma_address_generator
+Used module:     \dma_control_register
+
+6.2. Analyzing design hierarchy..
+Top module:  \dma_top
+Used module:     \dma_controller_fsm
+Used module:     \dma_transfer_counter
+Used module:     \dma_address_generator
+Used module:     \dma_control_register
+Removed 0 unused modules.
+
+7. Executing PROC pass (convert processes to netlists).
+
+7.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+7.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$Project20_DMA_Controller/rtl/dma_transfer_counter.v:15$6 in module dma_transfer_counter.
+Marked 3 switch rules as full_case in process $proc$Project20_DMA_Controller/rtl/dma_controller_fsm.v:28$5 in module dma_controller_fsm.
+Marked 1 switch rules as full_case in process $proc$Project20_DMA_Controller/rtl/dma_control_register.v:15$4 in module dma_control_register.
+Marked 2 switch rules as full_case in process $proc$Project20_DMA_Controller/rtl/dma_address_generator.v:16$1 in module dma_address_generator.
+Removed a total of 0 dead cases.
+
+7.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 7 redundant assignments.
+Promoted 0 assignments to connections.
+
+7.4. Executing PROC_INIT pass (extract init attributes).
+
+7.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst in `\dma_transfer_counter.$proc$Project20_DMA_Controller/rtl/dma_transfer_counter.v:15$6'.
+Found async reset \rst in `\dma_controller_fsm.$proc$Project20_DMA_Controller/rtl/dma_controller_fsm.v:28$5'.
+Found async reset \rst in `\dma_control_register.$proc$Project20_DMA_Controller/rtl/dma_control_register.v:15$4'.
+Found async reset \rst in `\dma_address_generator.$proc$Project20_DMA_Controller/rtl/dma_address_generator.v:16$1'.
+
+7.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~7 debug messages>
+
+7.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\dma_transfer_counter.$proc$Project20_DMA_Controller/rtl/dma_transfer_counter.v:15$6'.
+     1/1: $0\count[15:0]
+Creating decoders for process `\dma_controller_fsm.$proc$Project20_DMA_Controller/rtl/dma_controller_fsm.v:28$5'.
+     1/6: $0\dma_done[0:0]
+     2/6: $0\decrement[0:0]
+     3/6: $0\increment[0:0]
+     4/6: $0\load[0:0]
+     5/6: $0\state[2:0]
+     6/6: $0\dma_busy[0:0]
+Creating decoders for process `\dma_control_register.$proc$Project20_DMA_Controller/rtl/dma_control_register.v:15$4'.
+     1/3: $0\done_reg[0:0]
+     2/3: $0\busy_reg[0:0]
+     3/3: $0\start_reg[0:0]
+Creating decoders for process `\dma_address_generator.$proc$Project20_DMA_Controller/rtl/dma_address_generator.v:16$1'.
+     1/2: $0\dst_addr[31:0]
+     2/2: $0\src_addr[31:0]
+
+7.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+7.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\dma_transfer_counter.\count' using process `\dma_transfer_counter.$proc$Project20_DMA_Controller/rtl/dma_transfer_counter.v:15$6'.
+  created $adff cell `$procdff$62' with positive edge clock and positive level reset.
+Creating register for signal `\dma_controller_fsm.\load' using process `\dma_controller_fsm.$proc$Project20_DMA_Controller/rtl/dma_controller_fsm.v:28$5'.
+  created $adff cell `$procdff$63' with positive edge clock and positive level reset.
+Creating register for signal `\dma_controller_fsm.\increment' using process `\dma_controller_fsm.$proc$Project20_DMA_Controller/rtl/dma_controller_fsm.v:28$5'.
+  created $adff cell `$procdff$64' with positive edge clock and positive level reset.
+Creating register for signal `\dma_controller_fsm.\dma_busy' using process `\dma_controller_fsm.$proc$Project20_DMA_Controller/rtl/dma_controller_fsm.v:28$5'.
+  created $adff cell `$procdff$65' with positive edge clock and positive level reset.
+Creating register for signal `\dma_controller_fsm.\dma_done' using process `\dma_controller_fsm.$proc$Project20_DMA_Controller/rtl/dma_controller_fsm.v:28$5'.
+  created $adff cell `$procdff$66' with positive edge clock and positive level reset.
+Creating register for signal `\dma_controller_fsm.\decrement' using process `\dma_controller_fsm.$proc$Project20_DMA_Controller/rtl/dma_controller_fsm.v:28$5'.
+  created $adff cell `$procdff$67' with positive edge clock and positive level reset.
+Creating register for signal `\dma_controller_fsm.\state' using process `\dma_controller_fsm.$proc$Project20_DMA_Controller/rtl/dma_controller_fsm.v:28$5'.
+  created $adff cell `$procdff$68' with positive edge clock and positive level reset.
+Creating register for signal `\dma_control_register.\start_reg' using process `\dma_control_register.$proc$Project20_DMA_Controller/rtl/dma_control_register.v:15$4'.
+  created $adff cell `$procdff$69' with positive edge clock and positive level reset.
+Creating register for signal `\dma_control_register.\busy_reg' using process `\dma_control_register.$proc$Project20_DMA_Controller/rtl/dma_control_register.v:15$4'.
+  created $adff cell `$procdff$70' with positive edge clock and positive level reset.
+Creating register for signal `\dma_control_register.\done_reg' using process `\dma_control_register.$proc$Project20_DMA_Controller/rtl/dma_control_register.v:15$4'.
+  created $adff cell `$procdff$71' with positive edge clock and positive level reset.
+Creating register for signal `\dma_address_generator.\src_addr' using process `\dma_address_generator.$proc$Project20_DMA_Controller/rtl/dma_address_generator.v:16$1'.
+  created $adff cell `$procdff$72' with positive edge clock and positive level reset.
+Creating register for signal `\dma_address_generator.\dst_addr' using process `\dma_address_generator.$proc$Project20_DMA_Controller/rtl/dma_address_generator.v:16$1'.
+  created $adff cell `$procdff$73' with positive edge clock and positive level reset.
+
+7.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+7.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `\dma_transfer_counter.$proc$Project20_DMA_Controller/rtl/dma_transfer_counter.v:15$6'.
+Removing empty process `dma_transfer_counter.$proc$Project20_DMA_Controller/rtl/dma_transfer_counter.v:15$6'.
+Found and cleaned up 3 empty switches in `\dma_controller_fsm.$proc$Project20_DMA_Controller/rtl/dma_controller_fsm.v:28$5'.
+Removing empty process `dma_controller_fsm.$proc$Project20_DMA_Controller/rtl/dma_controller_fsm.v:28$5'.
+Removing empty process `dma_control_register.$proc$Project20_DMA_Controller/rtl/dma_control_register.v:15$4'.
+Found and cleaned up 2 empty switches in `\dma_address_generator.$proc$Project20_DMA_Controller/rtl/dma_address_generator.v:16$1'.
+Removing empty process `dma_address_generator.$proc$Project20_DMA_Controller/rtl/dma_address_generator.v:16$1'.
+Cleaned up 7 empty switches.
+
+7.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_transfer_counter.
+<suppressed ~2 debug messages>
+Optimizing module dma_top.
+Optimizing module dma_controller_fsm.
+<suppressed ~2 debug messages>
+Optimizing module dma_control_register.
+Optimizing module dma_address_generator.
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_transfer_counter.
+Optimizing module dma_top.
+Optimizing module dma_controller_fsm.
+Optimizing module dma_control_register.
+Optimizing module dma_address_generator.
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_transfer_counter'.
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_controller_fsm'.
+<suppressed ~18 debug messages>
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_address_generator'.
+Removed a total of 6 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \dma_transfer_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \dma_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \dma_control_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_address_generator..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~9 debug messages>
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \dma_transfer_counter.
+  Optimizing cells in module \dma_top.
+  Optimizing cells in module \dma_controller_fsm.
+    New ctrl vector for $pmux cell $procmux$48: { $procmux$50_CMP $auto$opt_reduce.cc:134:opt_pmux$75 }
+  Optimizing cells in module \dma_controller_fsm.
+  Optimizing cells in module \dma_control_register.
+  Optimizing cells in module \dma_address_generator.
+Performed a total of 1 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_transfer_counter'.
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_controller_fsm'.
+<suppressed ~6 debug messages>
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_address_generator'.
+Removed a total of 2 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$62 ($adff) from module dma_transfer_counter (D = $procmux$14_Y, Q = \count).
+Adding EN signal on $procdff$65 ($adff) from module dma_controller_fsm (D = $procmux$48_Y, Q = \dma_busy).
+Adding EN signal on $procdff$68 ($adff) from module dma_controller_fsm (D = $procmux$39_Y, Q = \state).
+Adding EN signal on $procdff$72 ($adff) from module dma_address_generator (D = $procmux$60_Y, Q = \src_addr).
+Adding EN signal on $procdff$73 ($adff) from module dma_address_generator (D = $procmux$55_Y, Q = \dst_addr).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dma_transfer_counter..
+Finding unused cells or wires in module \dma_top..
+Finding unused cells or wires in module \dma_controller_fsm..
+Finding unused cells or wires in module \dma_control_register..
+Finding unused cells or wires in module \dma_address_generator..
+Removed 0 unused cells and 28 unused wires.
+<suppressed ~4 debug messages>
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_address_generator.
+<suppressed ~2 debug messages>
+Optimizing module dma_control_register.
+Optimizing module dma_controller_fsm.
+<suppressed ~1 debug messages>
+Optimizing module dma_top.
+Optimizing module dma_transfer_counter.
+<suppressed ~1 debug messages>
+
+8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \dma_address_generator..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \dma_control_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \dma_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_transfer_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \dma_address_generator.
+  Optimizing cells in module \dma_control_register.
+  Optimizing cells in module \dma_controller_fsm.
+  Optimizing cells in module \dma_top.
+  Optimizing cells in module \dma_transfer_counter.
+Performed a total of 0 changes.
+
+8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_address_generator'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_controller_fsm'.
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_transfer_counter'.
+Removed a total of 1 cells.
+
+8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dma_address_generator..
+Finding unused cells or wires in module \dma_control_register..
+Finding unused cells or wires in module \dma_controller_fsm..
+Finding unused cells or wires in module \dma_top..
+Finding unused cells or wires in module \dma_transfer_counter..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_address_generator.
+Optimizing module dma_control_register.
+Optimizing module dma_controller_fsm.
+Optimizing module dma_top.
+Optimizing module dma_transfer_counter.
+
+8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \dma_address_generator..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \dma_control_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \dma_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_transfer_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \dma_address_generator.
+  Optimizing cells in module \dma_control_register.
+  Optimizing cells in module \dma_controller_fsm.
+  Optimizing cells in module \dma_top.
+  Optimizing cells in module \dma_transfer_counter.
+Performed a total of 0 changes.
+
+8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_address_generator'.
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_controller_fsm'.
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_transfer_counter'.
+Removed a total of 0 cells.
+
+8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dma_address_generator..
+Finding unused cells or wires in module \dma_control_register..
+Finding unused cells or wires in module \dma_controller_fsm..
+Finding unused cells or wires in module \dma_top..
+Finding unused cells or wires in module \dma_transfer_counter..
+
+8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_address_generator.
+Optimizing module dma_control_register.
+Optimizing module dma_controller_fsm.
+Optimizing module dma_top.
+Optimizing module dma_transfer_counter.
+
+8.23. Finished OPT passes. (There is nothing left to do.)
+
+9. Executing FSM pass (extract and optimize FSM).
+
+9.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+9.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+9.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dma_address_generator..
+Finding unused cells or wires in module \dma_control_register..
+Finding unused cells or wires in module \dma_controller_fsm..
+Finding unused cells or wires in module \dma_top..
+Finding unused cells or wires in module \dma_transfer_counter..
+
+9.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+9.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+9.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+9.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_address_generator.
+Optimizing module dma_control_register.
+Optimizing module dma_controller_fsm.
+Optimizing module dma_top.
+Optimizing module dma_transfer_counter.
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_address_generator'.
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_controller_fsm'.
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_transfer_counter'.
+Removed a total of 0 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \dma_address_generator..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \dma_control_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \dma_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_transfer_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \dma_address_generator.
+  Optimizing cells in module \dma_control_register.
+  Optimizing cells in module \dma_controller_fsm.
+  Optimizing cells in module \dma_top.
+  Optimizing cells in module \dma_transfer_counter.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_address_generator'.
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_controller_fsm'.
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_transfer_counter'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dma_address_generator..
+Finding unused cells or wires in module \dma_control_register..
+Finding unused cells or wires in module \dma_controller_fsm..
+Finding unused cells or wires in module \dma_top..
+Finding unused cells or wires in module \dma_transfer_counter..
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_address_generator.
+Optimizing module dma_control_register.
+Optimizing module dma_controller_fsm.
+Optimizing module dma_top.
+Optimizing module dma_transfer_counter.
+
+10.9. Finished OPT passes. (There is nothing left to do.)
+
+11. Executing MEMORY pass.
+
+11.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+11.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+11.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+11.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+11.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+11.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dma_address_generator..
+Finding unused cells or wires in module \dma_control_register..
+Finding unused cells or wires in module \dma_controller_fsm..
+Finding unused cells or wires in module \dma_top..
+Finding unused cells or wires in module \dma_transfer_counter..
+
+11.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+11.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+11.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dma_address_generator..
+Finding unused cells or wires in module \dma_control_register..
+Finding unused cells or wires in module \dma_controller_fsm..
+Finding unused cells or wires in module \dma_top..
+Finding unused cells or wires in module \dma_transfer_counter..
+
+11.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+11.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_address_generator.
+Optimizing module dma_control_register.
+Optimizing module dma_controller_fsm.
+Optimizing module dma_top.
+Optimizing module dma_transfer_counter.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_address_generator'.
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_controller_fsm'.
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_transfer_counter'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \dma_address_generator..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \dma_control_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \dma_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_transfer_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \dma_address_generator.
+  Optimizing cells in module \dma_control_register.
+  Optimizing cells in module \dma_controller_fsm.
+  Optimizing cells in module \dma_top.
+  Optimizing cells in module \dma_transfer_counter.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_address_generator'.
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_controller_fsm'.
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_transfer_counter'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dma_address_generator..
+Finding unused cells or wires in module \dma_control_register..
+Finding unused cells or wires in module \dma_controller_fsm..
+Finding unused cells or wires in module \dma_top..
+Finding unused cells or wires in module \dma_transfer_counter..
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_address_generator.
+Optimizing module dma_control_register.
+Optimizing module dma_controller_fsm.
+Optimizing module dma_top.
+Optimizing module dma_transfer_counter.
+
+12.9. Finished OPT passes. (There is nothing left to do.)
+
+13. Executing TECHMAP pass (map to technology primitives).
+
+13.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+13.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $logic_and.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $adffe.
+Using template $paramod$2bd81f420048247ff6903399c560fe0f8bd48ccc\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$56f7ce6d87f8add68ca646dc02d7695a3189f8e5\_90_pmux for cells of type $pmux.
+Using template $paramod$c5c783b17ab1d780abfad8cfe6563a0a7b47a3b0\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $adff.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=32:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=32:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=32:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+No more expansions possible.
+<suppressed ~813 debug messages>
+
+14. Executing OPT pass (performing simple optimizations).
+
+14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_address_generator.
+<suppressed ~374 debug messages>
+Optimizing module dma_control_register.
+Optimizing module dma_controller_fsm.
+<suppressed ~40 debug messages>
+Optimizing module dma_top.
+Optimizing module dma_transfer_counter.
+<suppressed ~225 debug messages>
+
+14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_address_generator'.
+<suppressed ~6 debug messages>
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_controller_fsm'.
+<suppressed ~42 debug messages>
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_transfer_counter'.
+<suppressed ~90 debug messages>
+Removed a total of 46 cells.
+
+14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \dma_address_generator..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_control_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_controller_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_transfer_counter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \dma_address_generator.
+  Optimizing cells in module \dma_control_register.
+  Optimizing cells in module \dma_controller_fsm.
+  Optimizing cells in module \dma_top.
+  Optimizing cells in module \dma_transfer_counter.
+Performed a total of 0 changes.
+
+14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_address_generator'.
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_controller_fsm'.
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_transfer_counter'.
+Removed a total of 0 cells.
+
+14.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $auto$ff.cc:266:slice$1044 ($_DFFE_PP0P_) from module dma_address_generator (D = $0\src_addr[31:0] [0], Q = \src_addr [0]).
+Adding EN signal on $auto$ff.cc:266:slice$1045 ($_DFFE_PP0P_) from module dma_address_generator (D = $0\src_addr[31:0] [1], Q = \src_addr [1]).
+Adding EN signal on $auto$ff.cc:266:slice$1076 ($_DFFE_PP0P_) from module dma_address_generator (D = $0\dst_addr[31:0] [0], Q = \dst_addr [0]).
+Adding EN signal on $auto$ff.cc:266:slice$1077 ($_DFFE_PP0P_) from module dma_address_generator (D = $0\dst_addr[31:0] [1], Q = \dst_addr [1]).
+
+14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dma_address_generator..
+Finding unused cells or wires in module \dma_control_register..
+Finding unused cells or wires in module \dma_controller_fsm..
+Finding unused cells or wires in module \dma_top..
+Finding unused cells or wires in module \dma_transfer_counter..
+Removed 86 unused cells and 448 unused wires.
+<suppressed ~89 debug messages>
+
+14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_address_generator.
+<suppressed ~12 debug messages>
+Optimizing module dma_control_register.
+Optimizing module dma_controller_fsm.
+Optimizing module dma_top.
+Optimizing module dma_transfer_counter.
+
+14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \dma_address_generator..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_control_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_controller_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_transfer_counter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \dma_address_generator.
+  Optimizing cells in module \dma_control_register.
+  Optimizing cells in module \dma_controller_fsm.
+  Optimizing cells in module \dma_top.
+  Optimizing cells in module \dma_transfer_counter.
+Performed a total of 0 changes.
+
+14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_address_generator'.
+<suppressed ~27 debug messages>
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_controller_fsm'.
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_transfer_counter'.
+Removed a total of 9 cells.
+
+14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dma_address_generator..
+Finding unused cells or wires in module \dma_control_register..
+Finding unused cells or wires in module \dma_controller_fsm..
+Finding unused cells or wires in module \dma_top..
+Finding unused cells or wires in module \dma_transfer_counter..
+Removed 0 unused cells and 13 unused wires.
+<suppressed ~1 debug messages>
+
+14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_address_generator.
+Optimizing module dma_control_register.
+Optimizing module dma_controller_fsm.
+Optimizing module dma_top.
+Optimizing module dma_transfer_counter.
+
+14.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+14.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \dma_address_generator..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_control_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_controller_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dma_transfer_counter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+14.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \dma_address_generator.
+  Optimizing cells in module \dma_control_register.
+  Optimizing cells in module \dma_controller_fsm.
+  Optimizing cells in module \dma_top.
+  Optimizing cells in module \dma_transfer_counter.
+Performed a total of 0 changes.
+
+14.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dma_address_generator'.
+Finding identical cells in module `\dma_control_register'.
+Finding identical cells in module `\dma_controller_fsm'.
+Finding identical cells in module `\dma_top'.
+Finding identical cells in module `\dma_transfer_counter'.
+Removed a total of 0 cells.
+
+14.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+14.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dma_address_generator..
+Finding unused cells or wires in module \dma_control_register..
+Finding unused cells or wires in module \dma_controller_fsm..
+Finding unused cells or wires in module \dma_top..
+Finding unused cells or wires in module \dma_transfer_counter..
+
+14.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dma_address_generator.
+Optimizing module dma_control_register.
+Optimizing module dma_controller_fsm.
+Optimizing module dma_top.
+Optimizing module dma_transfer_counter.
+
+14.23. Finished OPT passes. (There is nothing left to do.)
+
+15. Executing ABC pass (technology mapping using ABC).
+
+15.1. Extracting gate netlist of module `\dma_address_generator' to `<abc-temp-dir>/input.blif'..
+Extracted 286 gates and 413 wires to a netlist network with 126 inputs and 66 outputs.
+
+15.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /mnt/e/VLSI_projects_CHIP/ASIC_Tools/Project20_DMA_Controller/liberty/NangateOpenCellLibrary_typical.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.11 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "ANTENNA_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X2".
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "TAPCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X2" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X4" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X8" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X16" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X32" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC0_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC1_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X16".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TINV_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "TLAT_X1".
+ABC: Library "NangateOpenCellLibrary" from "/mnt/e/VLSI_projects_CHIP/ASIC_Tools/Project20_DMA_Controller/liberty/NangateOpenCellLibrary_typical.lib" has 90 cells (35 skipped: 21 seq; 6 tri-state; 8 no func; 10 dont_use).  Time =     0.17 sec
+ABC: Memory =   11.38 MB. Time =     0.17 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FA_X1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+15.1.2. Re-integrating ABC results.
+ABC RESULTS:          NAND3_X1 cells:        2
+ABC RESULTS:            INV_X1 cells:       19
+ABC RESULTS:          AOI21_X1 cells:       12
+ABC RESULTS:            OR2_X1 cells:        3
+ABC RESULTS:          NAND4_X1 cells:        4
+ABC RESULTS:           NOR2_X1 cells:        8
+ABC RESULTS:           NOR3_X1 cells:        4
+ABC RESULTS:           NOR4_X1 cells:        4
+ABC RESULTS:           AND3_X1 cells:        2
+ABC RESULTS:           AND4_X1 cells:       10
+ABC RESULTS:          NAND2_X1 cells:       75
+ABC RESULTS:           AND2_X1 cells:       29
+ABC RESULTS:          OAI21_X1 cells:      100
+ABC RESULTS:            BUF_X1 cells:        1
+ABC RESULTS:        internal signals:      221
+ABC RESULTS:           input signals:      126
+ABC RESULTS:          output signals:       66
+Removing temp directory.
+
+15.2. Extracting gate netlist of module `\dma_control_register' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+15.3. Extracting gate netlist of module `\dma_controller_fsm' to `<abc-temp-dir>/input.blif'..
+Extracted 43 gates and 51 wires to a netlist network with 5 inputs and 9 outputs.
+
+15.3.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /mnt/e/VLSI_projects_CHIP/ASIC_Tools/Project20_DMA_Controller/liberty/NangateOpenCellLibrary_typical.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.09 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "ANTENNA_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X2".
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "TAPCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X2" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X4" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X8" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X16" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X32" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC0_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC1_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X16".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TINV_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "TLAT_X1".
+ABC: Library "NangateOpenCellLibrary" from "/mnt/e/VLSI_projects_CHIP/ASIC_Tools/Project20_DMA_Controller/liberty/NangateOpenCellLibrary_typical.lib" has 90 cells (35 skipped: 21 seq; 6 tri-state; 8 no func; 10 dont_use).  Time =     0.14 sec
+ABC: Memory =   11.38 MB. Time =     0.14 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FA_X1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+15.3.2. Re-integrating ABC results.
+ABC RESULTS:           NOR2_X1 cells:        1
+ABC RESULTS:           NOR3_X1 cells:        1
+ABC RESULTS:            OR3_X1 cells:        1
+ABC RESULTS:          AOI21_X1 cells:        1
+ABC RESULTS:          NAND3_X1 cells:        2
+ABC RESULTS:         OAI211_X1 cells:        1
+ABC RESULTS:          NAND2_X1 cells:        3
+ABC RESULTS:         OAI221_X1 cells:        1
+ABC RESULTS:          OAI21_X1 cells:        1
+ABC RESULTS:            INV_X1 cells:        6
+ABC RESULTS:        internal signals:       37
+ABC RESULTS:           input signals:        5
+ABC RESULTS:          output signals:        9
+Removing temp directory.
+
+15.4. Extracting gate netlist of module `\dma_top' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+15.5. Extracting gate netlist of module `\dma_transfer_counter' to `<abc-temp-dir>/input.blif'..
+Extracted 133 gates and 168 wires to a netlist network with 34 inputs and 18 outputs.
+
+15.5.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /mnt/e/VLSI_projects_CHIP/ASIC_Tools/Project20_DMA_Controller/liberty/NangateOpenCellLibrary_typical.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.09 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "ANTENNA_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X2".
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "TAPCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X2" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X4" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X8" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X16" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X32" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC0_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC1_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X16".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TINV_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "TLAT_X1".
+ABC: Library "NangateOpenCellLibrary" from "/mnt/e/VLSI_projects_CHIP/ASIC_Tools/Project20_DMA_Controller/liberty/NangateOpenCellLibrary_typical.lib" has 90 cells (35 skipped: 21 seq; 6 tri-state; 8 no func; 10 dont_use).  Time =     0.13 sec
+ABC: Memory =   11.38 MB. Time =     0.13 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FA_X1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+15.5.2. Re-integrating ABC results.
+ABC RESULTS:            INV_X1 cells:        7
+ABC RESULTS:            OR4_X1 cells:        1
+ABC RESULTS:           NOR3_X1 cells:        2
+ABC RESULTS:          NAND4_X1 cells:        1
+ABC RESULTS:            OR3_X1 cells:        1
+ABC RESULTS:           NOR4_X1 cells:        2
+ABC RESULTS:          NAND3_X1 cells:        1
+ABC RESULTS:           NOR2_X1 cells:        3
+ABC RESULTS:         OAI211_X1 cells:        1
+ABC RESULTS:           AND2_X1 cells:        2
+ABC RESULTS:           XOR2_X1 cells:        4
+ABC RESULTS:          XNOR2_X1 cells:        8
+ABC RESULTS:          NAND2_X1 cells:       19
+ABC RESULTS:          OAI21_X1 cells:       19
+ABC RESULTS:        internal signals:      116
+ABC RESULTS:           input signals:       34
+ABC RESULTS:          output signals:       18
+Removing temp directory.
+Removed 0 unused cells and 380 unused wires.
+
+16. Executing Verilog backend.
+
+16.1. Executing BMUXMAP pass.
+
+16.2. Executing DEMUXMAP pass.
+Dumping module `\dma_address_generator'.
+Dumping module `\dma_control_register'.
+Dumping module `\dma_controller_fsm'.
+Dumping module `\dma_top'.
+Dumping module `\dma_transfer_counter'.
+
+17. Printing statistics.
+
+=== dma_address_generator ===
+
+   Number of wires:                219
+   Number of wire bits:            405
+   Number of public wires:           8
+   Number of public wire bits:     132
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                337
+     $_DFFE_PP0P_                   64
+     AND2_X1                        29
+     AND3_X1                         2
+     AND4_X1                        10
+     AOI21_X1                       12
+     BUF_X1                          1
+     INV_X1                         19
+     NAND2_X1                       75
+     NAND3_X1                        2
+     NAND4_X1                        4
+     NOR2_X1                         8
+     NOR3_X1                         4
+     NOR4_X1                         4
+     OAI21_X1                      100
+     OR2_X1                          3
+
+=== dma_control_register ===
+
+   Number of wires:                  8
+   Number of wire bits:              8
+   Number of public wires:           8
+   Number of public wire bits:       8
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  3
+     $_DFF_PP0_                      3
+
+=== dma_controller_fsm ===
+
+   Number of wires:                 26
+   Number of wire bits:             48
+   Number of public wires:          10
+   Number of public wire bits:      12
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 25
+     $_DFFE_PP0P_                    4
+     $_DFF_PP0_                      3
+     AOI21_X1                        1
+     INV_X1                          6
+     NAND2_X1                        3
+     NAND3_X1                        2
+     NOR2_X1                         1
+     NOR3_X1                         1
+     OAI211_X1                       1
+     OAI21_X1                        1
+     OAI221_X1                       1
+     OR3_X1                          1
+
+=== dma_top ===
+
+   Number of wires:                 18
+   Number of wire bits:            172
+   Number of public wires:          18
+   Number of public wire bits:     172
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  4
+     dma_address_generator           1
+     dma_control_register            1
+     dma_controller_fsm              1
+     dma_transfer_counter            1
+
+=== dma_transfer_counter ===
+
+   Number of wires:                 62
+   Number of wire bits:            107
+   Number of public wires:           7
+   Number of public wire bits:      37
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 87
+     $_DFFE_PP0P_                   16
+     AND2_X1                         2
+     INV_X1                          7
+     NAND2_X1                       19
+     NAND3_X1                        1
+     NAND4_X1                        1
+     NOR2_X1                         3
+     NOR3_X1                         2
+     NOR4_X1                         2
+     OAI211_X1                       1
+     OAI21_X1                       19
+     OR3_X1                          1
+     OR4_X1                          1
+     XNOR2_X1                        8
+     XOR2_X1                         4
+
+=== design hierarchy ===
+
+   dma_top                           1
+     dma_address_generator           1
+     dma_control_register            1
+     dma_controller_fsm              1
+     dma_transfer_counter            1
+
+   Number of wires:                333
+   Number of wire bits:            740
+   Number of public wires:          51
+   Number of public wire bits:     361
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                452
+     $_DFFE_PP0P_                   84
+     $_DFF_PP0_                      6
+     AND2_X1                        31
+     AND3_X1                         2
+     AND4_X1                        10
+     AOI21_X1                       13
+     BUF_X1                          1
+     INV_X1                         32
+     NAND2_X1                       97
+     NAND3_X1                        5
+     NAND4_X1                        5
+     NOR2_X1                        12
+     NOR3_X1                         7
+     NOR4_X1                         6
+     OAI211_X1                       2
+     OAI21_X1                      120
+     OAI221_X1                       1
+     OR2_X1                          3
+     OR3_X1                          2
+     OR4_X1                          1
+     XNOR2_X1                        8
+     XOR2_X1                         4
+
+End of script. Logfile hash: 1d8eea8b48, CPU: user 0.69s system 0.09s, MEM: 17.69 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 58% 1x abc (1 sec), 10% 15x opt_expr (0 sec), ...
