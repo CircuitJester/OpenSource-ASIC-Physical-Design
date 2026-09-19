@@ -1,0 +1,24 @@
+read_verilog \
+  Project21_Pipelined_ALU/rtl/alu_control.v \
+  Project21_Pipelined_ALU/rtl/alu_execute.v \
+  Project21_Pipelined_ALU/rtl/alu_flags.v \
+  Project21_Pipelined_ALU/rtl/alu_pipeline_register.v \
+  Project21_Pipelined_ALU/rtl/pipelined_alu_top.v
+
+hierarchy -top pipelined_alu_top
+
+proc
+opt
+fsm
+opt
+memory
+opt
+techmap
+opt
+
+abc -liberty Project21_Pipelined_ALU/liberty/NangateOpenCellLibrary_typical.lib
+
+clean
+write_verilog -noattr Project21_Pipelined_ALU/yosys/asic/pipelined_alu_top_mapped.v
+
+stat
