@@ -1,0 +1,25 @@
+read_verilog \
+  Project23_Forwarding_Unit/rtl/forwarding_comparator.v \
+  Project23_Forwarding_Unit/rtl/forwarding_control_logic.v \
+  Project23_Forwarding_Unit/rtl/forwarding_datapath.v \
+  Project23_Forwarding_Unit/rtl/forwarding_mux.v \
+  Project23_Forwarding_Unit/rtl/forwarding_unit.v
+
+hierarchy -top forwarding_unit
+
+proc
+opt
+fsm
+opt
+memory
+opt
+techmap
+opt
+
+dfflibmap -liberty Project23_Forwarding_Unit/liberty/NangateOpenCellLibrary_typical.lib
+abc -liberty Project23_Forwarding_Unit/liberty/NangateOpenCellLibrary_typical.lib
+
+clean
+write_verilog -noattr Project23_Forwarding_Unit/yosys/asic/forwarding_unit_mapped.v
+
+stat
