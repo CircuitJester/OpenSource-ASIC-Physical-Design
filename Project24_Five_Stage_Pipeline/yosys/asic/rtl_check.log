@@ -1,0 +1,462 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Running command `
+read_verilog rtl/if_id_pipeline_register.v
+read_verilog rtl/id_ex_pipeline_register.v
+read_verilog rtl/ex_mem_pipeline_register.v
+read_verilog rtl/mem_wb_pipeline_register.v
+read_verilog rtl/pipeline_control_unit.v
+read_verilog rtl/pipelined_alu_top.v
+
+hierarchy -check -top pipelined_alu_top
+proc
+opt
+check
+' --
+
+1. Executing Verilog-2005 frontend: rtl/if_id_pipeline_register.v
+Parsing Verilog input from `rtl/if_id_pipeline_register.v' to AST representation.
+Generating RTLIL representation for module `\if_id_pipeline_register'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/id_ex_pipeline_register.v
+Parsing Verilog input from `rtl/id_ex_pipeline_register.v' to AST representation.
+Generating RTLIL representation for module `\id_ex_pipeline_register'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/ex_mem_pipeline_register.v
+Parsing Verilog input from `rtl/ex_mem_pipeline_register.v' to AST representation.
+Generating RTLIL representation for module `\ex_mem_pipeline_register'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/mem_wb_pipeline_register.v
+Parsing Verilog input from `rtl/mem_wb_pipeline_register.v' to AST representation.
+Generating RTLIL representation for module `\mem_wb_pipeline_register'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl/pipeline_control_unit.v
+Parsing Verilog input from `rtl/pipeline_control_unit.v' to AST representation.
+Generating RTLIL representation for module `\pipeline_control_unit'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: rtl/pipelined_alu_top.v
+Parsing Verilog input from `rtl/pipelined_alu_top.v' to AST representation.
+Generating RTLIL representation for module `\pipelined_alu_top'.
+Successfully finished Verilog frontend.
+
+7. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1. Analyzing design hierarchy..
+Top module:  \pipelined_alu_top
+Used module:     \mem_wb_pipeline_register
+Used module:     \ex_mem_pipeline_register
+Used module:     \id_ex_pipeline_register
+Used module:     \if_id_pipeline_register
+Used module:     \pipeline_control_unit
+
+7.2. Analyzing design hierarchy..
+Top module:  \pipelined_alu_top
+Used module:     \mem_wb_pipeline_register
+Used module:     \ex_mem_pipeline_register
+Used module:     \id_ex_pipeline_register
+Used module:     \if_id_pipeline_register
+Used module:     \pipeline_control_unit
+Removed 0 unused modules.
+
+8. Executing PROC pass (convert processes to netlists).
+
+8.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+8.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$rtl/pipeline_control_unit.v:10$13 in module pipeline_control_unit.
+Marked 1 switch rules as full_case in process $proc$rtl/mem_wb_pipeline_register.v:22$10 in module mem_wb_pipeline_register.
+Marked 1 switch rules as full_case in process $proc$rtl/ex_mem_pipeline_register.v:28$7 in module ex_mem_pipeline_register.
+Marked 1 switch rules as full_case in process $proc$rtl/id_ex_pipeline_register.v:40$4 in module id_ex_pipeline_register.
+Marked 1 switch rules as full_case in process $proc$rtl/if_id_pipeline_register.v:14$1 in module if_id_pipeline_register.
+Removed a total of 0 dead cases.
+
+8.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 3 assignments to connections.
+
+8.4. Executing PROC_INIT pass (extract init attributes).
+
+8.5. Executing PROC_ARST pass (detect async resets in processes).
+
+8.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~10 debug messages>
+
+8.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\pipeline_control_unit.$proc$rtl/pipeline_control_unit.v:10$13'.
+     1/6: $2\id_ex_flush[0:0]
+     2/6: $2\if_id_write[0:0]
+     3/6: $2\pc_write[0:0]
+     4/6: $1\id_ex_flush[0:0]
+     5/6: $1\if_id_write[0:0]
+     6/6: $1\pc_write[0:0]
+Creating decoders for process `\mem_wb_pipeline_register.$proc$rtl/mem_wb_pipeline_register.v:22$10'.
+     1/5: $0\mem_data_out[31:0]
+     2/5: $0\alu_result_out[31:0]
+     3/5: $0\mem_to_reg_out[0:0]
+     4/5: $0\reg_write_out[0:0]
+     5/5: $0\rd_out[4:0]
+Creating decoders for process `\ex_mem_pipeline_register.$proc$rtl/ex_mem_pipeline_register.v:28$7'.
+     1/8: $0\zero_out[0:0]
+     2/8: $0\store_data_out[31:0]
+     3/8: $0\alu_result_out[31:0]
+     4/8: $0\mem_to_reg_out[0:0]
+     5/8: $0\mem_write_out[0:0]
+     6/8: $0\mem_read_out[0:0]
+     7/8: $0\reg_write_out[0:0]
+     8/8: $0\rd_out[4:0]
+Creating decoders for process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+     1/13: $0\alu_src_out[0:0]
+     2/13: $0\mem_to_reg_out[0:0]
+     3/13: $0\mem_write_out[0:0]
+     4/13: $0\mem_read_out[0:0]
+     5/13: $0\reg_write_out[0:0]
+     6/13: $0\alu_control_out[3:0]
+     7/13: $0\rd_out[4:0]
+     8/13: $0\rs2_out[4:0]
+     9/13: $0\rs1_out[4:0]
+    10/13: $0\immediate_out[31:0]
+    11/13: $0\rs2_value_out[31:0]
+    12/13: $0\rs1_value_out[31:0]
+    13/13: $0\pc_out[31:0]
+Creating decoders for process `\if_id_pipeline_register.$proc$rtl/if_id_pipeline_register.v:14$1'.
+     1/2: $0\instruction_out[31:0]
+     2/2: $0\pc_out[31:0]
+
+8.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\pipeline_control_unit.\pc_write' from process `\pipeline_control_unit.$proc$rtl/pipeline_control_unit.v:10$13'.
+No latch inferred for signal `\pipeline_control_unit.\if_id_write' from process `\pipeline_control_unit.$proc$rtl/pipeline_control_unit.v:10$13'.
+No latch inferred for signal `\pipeline_control_unit.\id_ex_flush' from process `\pipeline_control_unit.$proc$rtl/pipeline_control_unit.v:10$13'.
+
+8.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\mem_wb_pipeline_register.\rd_out' using process `\mem_wb_pipeline_register.$proc$rtl/mem_wb_pipeline_register.v:22$10'.
+  created $dff cell `$procdff$182' with positive edge clock.
+Creating register for signal `\mem_wb_pipeline_register.\reg_write_out' using process `\mem_wb_pipeline_register.$proc$rtl/mem_wb_pipeline_register.v:22$10'.
+  created $dff cell `$procdff$183' with positive edge clock.
+Creating register for signal `\mem_wb_pipeline_register.\mem_to_reg_out' using process `\mem_wb_pipeline_register.$proc$rtl/mem_wb_pipeline_register.v:22$10'.
+  created $dff cell `$procdff$184' with positive edge clock.
+Creating register for signal `\mem_wb_pipeline_register.\alu_result_out' using process `\mem_wb_pipeline_register.$proc$rtl/mem_wb_pipeline_register.v:22$10'.
+  created $dff cell `$procdff$185' with positive edge clock.
+Creating register for signal `\mem_wb_pipeline_register.\mem_data_out' using process `\mem_wb_pipeline_register.$proc$rtl/mem_wb_pipeline_register.v:22$10'.
+  created $dff cell `$procdff$186' with positive edge clock.
+Creating register for signal `\ex_mem_pipeline_register.\rd_out' using process `\ex_mem_pipeline_register.$proc$rtl/ex_mem_pipeline_register.v:28$7'.
+  created $dff cell `$procdff$187' with positive edge clock.
+Creating register for signal `\ex_mem_pipeline_register.\reg_write_out' using process `\ex_mem_pipeline_register.$proc$rtl/ex_mem_pipeline_register.v:28$7'.
+  created $dff cell `$procdff$188' with positive edge clock.
+Creating register for signal `\ex_mem_pipeline_register.\mem_read_out' using process `\ex_mem_pipeline_register.$proc$rtl/ex_mem_pipeline_register.v:28$7'.
+  created $dff cell `$procdff$189' with positive edge clock.
+Creating register for signal `\ex_mem_pipeline_register.\mem_write_out' using process `\ex_mem_pipeline_register.$proc$rtl/ex_mem_pipeline_register.v:28$7'.
+  created $dff cell `$procdff$190' with positive edge clock.
+Creating register for signal `\ex_mem_pipeline_register.\mem_to_reg_out' using process `\ex_mem_pipeline_register.$proc$rtl/ex_mem_pipeline_register.v:28$7'.
+  created $dff cell `$procdff$191' with positive edge clock.
+Creating register for signal `\ex_mem_pipeline_register.\alu_result_out' using process `\ex_mem_pipeline_register.$proc$rtl/ex_mem_pipeline_register.v:28$7'.
+  created $dff cell `$procdff$192' with positive edge clock.
+Creating register for signal `\ex_mem_pipeline_register.\store_data_out' using process `\ex_mem_pipeline_register.$proc$rtl/ex_mem_pipeline_register.v:28$7'.
+  created $dff cell `$procdff$193' with positive edge clock.
+Creating register for signal `\ex_mem_pipeline_register.\zero_out' using process `\ex_mem_pipeline_register.$proc$rtl/ex_mem_pipeline_register.v:28$7'.
+  created $dff cell `$procdff$194' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\pc_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$195' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\rs1_value_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$196' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\rs2_value_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$197' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\immediate_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$198' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\rs1_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$199' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\rs2_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$200' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\rd_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$201' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\alu_control_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$202' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\reg_write_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$203' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\mem_read_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$204' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\mem_write_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$205' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\mem_to_reg_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$206' with positive edge clock.
+Creating register for signal `\id_ex_pipeline_register.\alu_src_out' using process `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+  created $dff cell `$procdff$207' with positive edge clock.
+Creating register for signal `\if_id_pipeline_register.\pc_out' using process `\if_id_pipeline_register.$proc$rtl/if_id_pipeline_register.v:14$1'.
+  created $dff cell `$procdff$208' with positive edge clock.
+Creating register for signal `\if_id_pipeline_register.\instruction_out' using process `\if_id_pipeline_register.$proc$rtl/if_id_pipeline_register.v:14$1'.
+  created $dff cell `$procdff$209' with positive edge clock.
+
+8.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+8.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `\pipeline_control_unit.$proc$rtl/pipeline_control_unit.v:10$13'.
+Removing empty process `pipeline_control_unit.$proc$rtl/pipeline_control_unit.v:10$13'.
+Found and cleaned up 2 empty switches in `\mem_wb_pipeline_register.$proc$rtl/mem_wb_pipeline_register.v:22$10'.
+Removing empty process `mem_wb_pipeline_register.$proc$rtl/mem_wb_pipeline_register.v:22$10'.
+Found and cleaned up 2 empty switches in `\ex_mem_pipeline_register.$proc$rtl/ex_mem_pipeline_register.v:28$7'.
+Removing empty process `ex_mem_pipeline_register.$proc$rtl/ex_mem_pipeline_register.v:28$7'.
+Found and cleaned up 2 empty switches in `\id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+Removing empty process `id_ex_pipeline_register.$proc$rtl/id_ex_pipeline_register.v:40$4'.
+Found and cleaned up 2 empty switches in `\if_id_pipeline_register.$proc$rtl/if_id_pipeline_register.v:14$1'.
+Removing empty process `if_id_pipeline_register.$proc$rtl/if_id_pipeline_register.v:14$1'.
+Cleaned up 10 empty switches.
+
+8.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pipelined_alu_top.
+Optimizing module pipeline_control_unit.
+Optimizing module mem_wb_pipeline_register.
+<suppressed ~5 debug messages>
+Optimizing module ex_mem_pipeline_register.
+<suppressed ~8 debug messages>
+Optimizing module id_ex_pipeline_register.
+<suppressed ~13 debug messages>
+Optimizing module if_id_pipeline_register.
+<suppressed ~2 debug messages>
+
+9. Executing OPT pass (performing simple optimizations).
+
+9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pipelined_alu_top.
+Optimizing module pipeline_control_unit.
+Optimizing module mem_wb_pipeline_register.
+Optimizing module ex_mem_pipeline_register.
+Optimizing module id_ex_pipeline_register.
+Optimizing module if_id_pipeline_register.
+
+9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pipelined_alu_top'.
+Finding identical cells in module `\pipeline_control_unit'.
+Finding identical cells in module `\mem_wb_pipeline_register'.
+Finding identical cells in module `\ex_mem_pipeline_register'.
+Finding identical cells in module `\id_ex_pipeline_register'.
+Finding identical cells in module `\if_id_pipeline_register'.
+Removed a total of 0 cells.
+
+9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pipelined_alu_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pipeline_control_unit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$31.
+    dead port 1/2 on $mux $procmux$25.
+    dead port 1/2 on $mux $procmux$19.
+Running muxtree optimizer on module \mem_wb_pipeline_register..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ex_mem_pipeline_register..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \id_ex_pipeline_register..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \if_id_pipeline_register..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 3 multiplexer ports.
+<suppressed ~31 debug messages>
+
+9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pipelined_alu_top.
+  Optimizing cells in module \pipeline_control_unit.
+  Optimizing cells in module \mem_wb_pipeline_register.
+  Optimizing cells in module \ex_mem_pipeline_register.
+  Optimizing cells in module \id_ex_pipeline_register.
+  Optimizing cells in module \if_id_pipeline_register.
+Performed a total of 0 changes.
+
+9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pipelined_alu_top'.
+Finding identical cells in module `\pipeline_control_unit'.
+<suppressed ~6 debug messages>
+Finding identical cells in module `\mem_wb_pipeline_register'.
+Finding identical cells in module `\ex_mem_pipeline_register'.
+Finding identical cells in module `\id_ex_pipeline_register'.
+Finding identical cells in module `\if_id_pipeline_register'.
+Removed a total of 2 cells.
+
+9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$182 ($dff) from module mem_wb_pipeline_register (D = $procmux$62_Y, Q = \rd_out, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:266:slice$210 ($sdff) from module mem_wb_pipeline_register (D = \rd_in, Q = \rd_out).
+Adding SRST signal on $procdff$183 ($dff) from module mem_wb_pipeline_register (D = $procmux$57_Y, Q = \reg_write_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$212 ($sdff) from module mem_wb_pipeline_register (D = \reg_write_in, Q = \reg_write_out).
+Adding SRST signal on $procdff$184 ($dff) from module mem_wb_pipeline_register (D = $procmux$52_Y, Q = \mem_to_reg_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$214 ($sdff) from module mem_wb_pipeline_register (D = \mem_to_reg_in, Q = \mem_to_reg_out).
+Adding SRST signal on $procdff$185 ($dff) from module mem_wb_pipeline_register (D = $procmux$47_Y, Q = \alu_result_out, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$216 ($sdff) from module mem_wb_pipeline_register (D = \alu_result_in, Q = \alu_result_out).
+Adding SRST signal on $procdff$186 ($dff) from module mem_wb_pipeline_register (D = $procmux$42_Y, Q = \mem_data_out, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$218 ($sdff) from module mem_wb_pipeline_register (D = \mem_data_in, Q = \mem_data_out).
+Adding SRST signal on $procdff$187 ($dff) from module ex_mem_pipeline_register (D = $procmux$102_Y, Q = \rd_out, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:266:slice$220 ($sdff) from module ex_mem_pipeline_register (D = \rd_in, Q = \rd_out).
+Adding SRST signal on $procdff$188 ($dff) from module ex_mem_pipeline_register (D = $procmux$97_Y, Q = \reg_write_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$222 ($sdff) from module ex_mem_pipeline_register (D = \reg_write_in, Q = \reg_write_out).
+Adding SRST signal on $procdff$189 ($dff) from module ex_mem_pipeline_register (D = $procmux$92_Y, Q = \mem_read_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$224 ($sdff) from module ex_mem_pipeline_register (D = \mem_read_in, Q = \mem_read_out).
+Adding SRST signal on $procdff$190 ($dff) from module ex_mem_pipeline_register (D = $procmux$87_Y, Q = \mem_write_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$226 ($sdff) from module ex_mem_pipeline_register (D = \mem_write_in, Q = \mem_write_out).
+Adding SRST signal on $procdff$191 ($dff) from module ex_mem_pipeline_register (D = $procmux$82_Y, Q = \mem_to_reg_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$228 ($sdff) from module ex_mem_pipeline_register (D = \mem_to_reg_in, Q = \mem_to_reg_out).
+Adding SRST signal on $procdff$192 ($dff) from module ex_mem_pipeline_register (D = $procmux$77_Y, Q = \alu_result_out, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$230 ($sdff) from module ex_mem_pipeline_register (D = \alu_result_in, Q = \alu_result_out).
+Adding SRST signal on $procdff$193 ($dff) from module ex_mem_pipeline_register (D = $procmux$72_Y, Q = \store_data_out, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$232 ($sdff) from module ex_mem_pipeline_register (D = \store_data_in, Q = \store_data_out).
+Adding SRST signal on $procdff$194 ($dff) from module ex_mem_pipeline_register (D = $procmux$67_Y, Q = \zero_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$234 ($sdff) from module ex_mem_pipeline_register (D = \zero_in, Q = \zero_out).
+Adding SRST signal on $procdff$195 ($dff) from module id_ex_pipeline_register (D = $procmux$167_Y, Q = \pc_out, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$236 ($sdff) from module id_ex_pipeline_register (D = \pc_in, Q = \pc_out).
+Adding SRST signal on $procdff$196 ($dff) from module id_ex_pipeline_register (D = $procmux$162_Y, Q = \rs1_value_out, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$238 ($sdff) from module id_ex_pipeline_register (D = \rs1_value_in, Q = \rs1_value_out).
+Adding SRST signal on $procdff$197 ($dff) from module id_ex_pipeline_register (D = $procmux$157_Y, Q = \rs2_value_out, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$240 ($sdff) from module id_ex_pipeline_register (D = \rs2_value_in, Q = \rs2_value_out).
+Adding SRST signal on $procdff$198 ($dff) from module id_ex_pipeline_register (D = $procmux$152_Y, Q = \immediate_out, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$242 ($sdff) from module id_ex_pipeline_register (D = \immediate_in, Q = \immediate_out).
+Adding SRST signal on $procdff$199 ($dff) from module id_ex_pipeline_register (D = $procmux$147_Y, Q = \rs1_out, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:266:slice$244 ($sdff) from module id_ex_pipeline_register (D = \rs1_in, Q = \rs1_out).
+Adding SRST signal on $procdff$200 ($dff) from module id_ex_pipeline_register (D = $procmux$142_Y, Q = \rs2_out, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:266:slice$246 ($sdff) from module id_ex_pipeline_register (D = \rs2_in, Q = \rs2_out).
+Adding SRST signal on $procdff$201 ($dff) from module id_ex_pipeline_register (D = $procmux$137_Y, Q = \rd_out, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:266:slice$248 ($sdff) from module id_ex_pipeline_register (D = \rd_in, Q = \rd_out).
+Adding SRST signal on $procdff$202 ($dff) from module id_ex_pipeline_register (D = $procmux$132_Y, Q = \alu_control_out, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:266:slice$250 ($sdff) from module id_ex_pipeline_register (D = \alu_control_in, Q = \alu_control_out).
+Adding SRST signal on $procdff$203 ($dff) from module id_ex_pipeline_register (D = $procmux$127_Y, Q = \reg_write_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$252 ($sdff) from module id_ex_pipeline_register (D = \reg_write_in, Q = \reg_write_out).
+Adding SRST signal on $procdff$204 ($dff) from module id_ex_pipeline_register (D = $procmux$122_Y, Q = \mem_read_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$254 ($sdff) from module id_ex_pipeline_register (D = \mem_read_in, Q = \mem_read_out).
+Adding SRST signal on $procdff$205 ($dff) from module id_ex_pipeline_register (D = $procmux$117_Y, Q = \mem_write_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$256 ($sdff) from module id_ex_pipeline_register (D = \mem_write_in, Q = \mem_write_out).
+Adding SRST signal on $procdff$206 ($dff) from module id_ex_pipeline_register (D = $procmux$112_Y, Q = \mem_to_reg_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$258 ($sdff) from module id_ex_pipeline_register (D = \mem_to_reg_in, Q = \mem_to_reg_out).
+Adding SRST signal on $procdff$207 ($dff) from module id_ex_pipeline_register (D = $procmux$107_Y, Q = \alu_src_out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$260 ($sdff) from module id_ex_pipeline_register (D = \alu_src_in, Q = \alu_src_out).
+Adding SRST signal on $procdff$208 ($dff) from module if_id_pipeline_register (D = $procmux$177_Y, Q = \pc_out, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$262 ($sdff) from module if_id_pipeline_register (D = \pc_in, Q = \pc_out).
+Adding SRST signal on $procdff$209 ($dff) from module if_id_pipeline_register (D = $procmux$172_Y, Q = \instruction_out, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$264 ($sdff) from module if_id_pipeline_register (D = \instruction_in, Q = \instruction_out).
+
+9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pipelined_alu_top..
+Finding unused cells or wires in module \pipeline_control_unit..
+Finding unused cells or wires in module \mem_wb_pipeline_register..
+Finding unused cells or wires in module \ex_mem_pipeline_register..
+Finding unused cells or wires in module \id_ex_pipeline_register..
+Finding unused cells or wires in module \if_id_pipeline_register..
+Removed 60 unused cells and 169 unused wires.
+<suppressed ~65 debug messages>
+
+9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module ex_mem_pipeline_register.
+Optimizing module id_ex_pipeline_register.
+Optimizing module if_id_pipeline_register.
+Optimizing module mem_wb_pipeline_register.
+Optimizing module pipeline_control_unit.
+Optimizing module pipelined_alu_top.
+
+9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \ex_mem_pipeline_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \id_ex_pipeline_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \if_id_pipeline_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \mem_wb_pipeline_register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pipeline_control_unit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \pipelined_alu_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \ex_mem_pipeline_register.
+  Optimizing cells in module \id_ex_pipeline_register.
+  Optimizing cells in module \if_id_pipeline_register.
+  Optimizing cells in module \mem_wb_pipeline_register.
+  Optimizing cells in module \pipeline_control_unit.
+  Optimizing cells in module \pipelined_alu_top.
+Performed a total of 0 changes.
+
+9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\ex_mem_pipeline_register'.
+Finding identical cells in module `\id_ex_pipeline_register'.
+Finding identical cells in module `\if_id_pipeline_register'.
+Finding identical cells in module `\mem_wb_pipeline_register'.
+Finding identical cells in module `\pipeline_control_unit'.
+Finding identical cells in module `\pipelined_alu_top'.
+Removed a total of 0 cells.
+
+9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \ex_mem_pipeline_register..
+Finding unused cells or wires in module \id_ex_pipeline_register..
+Finding unused cells or wires in module \if_id_pipeline_register..
+Finding unused cells or wires in module \mem_wb_pipeline_register..
+Finding unused cells or wires in module \pipeline_control_unit..
+Finding unused cells or wires in module \pipelined_alu_top..
+
+9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module ex_mem_pipeline_register.
+Optimizing module id_ex_pipeline_register.
+Optimizing module if_id_pipeline_register.
+Optimizing module mem_wb_pipeline_register.
+Optimizing module pipeline_control_unit.
+Optimizing module pipelined_alu_top.
+
+9.16. Finished OPT passes. (There is nothing left to do.)
+
+10. Executing CHECK pass (checking for obvious problems).
+Checking module ex_mem_pipeline_register...
+Checking module id_ex_pipeline_register...
+Checking module if_id_pipeline_register...
+Checking module mem_wb_pipeline_register...
+Checking module pipeline_control_unit...
+Checking module pipelined_alu_top...
+Found and reported 0 problems.
+
+End of script. Logfile hash: 0109f3cd2a, CPU: user 0.14s system 0.02s, MEM: 10.95 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 23% 4x opt_expr (0 sec), 14% 12x read_verilog (0 sec), ...

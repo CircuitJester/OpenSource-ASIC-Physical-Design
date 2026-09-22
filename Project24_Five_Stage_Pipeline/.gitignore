@@ -1,0 +1,8 @@
+# Nangate45 library: check licensing before redistribution
+/liberty/NangateOpenCellLibrary_typical.lib
+
+# Generated Yosys schematic intermediate
+/synth/schematics/*.dot
+
+# Temporary synthesis backup
+/yosys/asic/*.bak
